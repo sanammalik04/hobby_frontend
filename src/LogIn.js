@@ -1,29 +1,59 @@
-import React from 'react'
+import React, {Component} from 'react'
 
+class LogIn extends Component{
 
-const LogIn = (props) => {
+    handleSubmit = () => {
 
-//   const handleSubmit = () => {
+        this.props.history.push("/projects") 
+    }
 
-//         props.history.push("/movies") 
-//     }
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
 
-    return(
-        // <div className='login'>
-        //     <h3 className='welcome'>Log In Here</h3>
-        //     <form onSubmit={(e)=> {
-        //         props.logIn(e)
-        //         handleSubmit()}}>
-                    
-        //         <label></label> 
-        //         <input type='text' name='username'placeholder='Username'/><br></br><br></br>
-        //         <label></label>
-        //         <input type='text' type="password" className="pwd" name='password'placeholder='Password'/><br></br><br></br>
-        //         <input type="submit" value="Submit"/>
-        //     </form>
-        // </div>
-        <div></div>
-    )
+    login = (e) => {
+        e.preventDefault()
+
+        fetch("http://localhost:3000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                username: this.state.username,
+                password: this.state.password
+            })
+        })
+        .then(res => res.json())
+        .then(userInfo => {
+            localStorage.token = userInfo.token
+        })
+    }
+
+    render(){
+        return(
+        <div>
+             <h2>Login</h2>
+            <form onSubmit={(e) => {
+                this.login(e)
+                this.handleSubmit()}}>
+
+            <label>UserName</label>
+            <input onChange={(e) => this.handleChange(e)} name="username" type="text" />
+
+            <label>Password</label>
+            <input onChange={(e) => this.handleChange(e)} name="password" type="password" />
+
+            <input type="submit"/>
+            </form>
+        </div>
+        )
+    }
 }
 
 export default LogIn
+
+

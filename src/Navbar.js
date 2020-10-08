@@ -3,6 +3,11 @@ import React from 'react'
 
 export const Navbar = (props) => {
     // console.log(props)
+
+    let logout = history => () => {
+        localStorage.clear();
+        history.push('/home')
+    }
     return(
         <div>
              {/* <div className={`ui inverted ${props.color} menu`}>
@@ -15,6 +20,7 @@ export const Navbar = (props) => {
                 </h2>
                 </a>
             </div>  */}
+            <button onClick={logout}>Logout</button>
         </div>
     )
 }
