@@ -1,12 +1,13 @@
 import React from 'react'
 
+let home = 'http://localhost:3001/home'
 
 export const Navbar = (props) => {
     // console.log(props)
 
-    let logout = history => () => {
-        localStorage.clear();
-        history.push('/home')
+    let logout = () => {
+        window.localStorage.clear();
+        window.location.href = home
     }
     return(
         <div>

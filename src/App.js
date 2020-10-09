@@ -7,7 +7,8 @@ import SignUp from './SignUp'
 import LogIn from './LogIn'
 import './App.css';
 import UserProfile from './UserProfile';
-import Projects from './Projects';
+import ProjectPage from './ProjectPage'
+
 
 let projectsUrl = 'http://localhost:3000/projects/'
 
@@ -17,6 +18,7 @@ class App extends Component {
     super()
     this.state = {
       projects: [],
+      UserProjects: []
       // addedProjects: []
     }
   }
@@ -37,6 +39,14 @@ class App extends Component {
   //     })
   //   }
   // }
+
+  adoptProject = (clickedProject) => {
+    let newProjectArray = this.state.projects.filter(project => project !== clickedProject )
+    this.setState({
+      projects: newProjectArray,
+      userProjects: [...this.state.userProjects, clickedProject]
+    })
+  }
   
 
   
@@ -62,7 +72,9 @@ class App extends Component {
 
           <Route path='/home' render={(routerProps) => <Homepage{...routerProps}/>}/>
 
-          <Route path='/projects' render={(routerProps) => <Projects{...routerProps} projects={this.state.projects}/> }/>
+          <Route path='/projects' render={(routerProps) => <ProjectPage{...routerProps} projects={this.state.projects}/>}/>
+
+          
 
 
 
