@@ -2,13 +2,15 @@ import React, {Component} from 'react';
 import Header from './Header';
 import Homepage from './Homepage';
 import Navbar from './Navbar';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
-import SignUp from './SignUp'
-import LogIn from './LogIn'
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import SignUp from './SignUp';
+import LogIn from './LogIn';
 import './App.css';
 import UserProfile from './UserProfile';
-import ProjectPage from './ProjectPage'
-
+import ProjectPage from './ProjectPage';
+import ProjectForm from './ProjectForm';
+import ProjectCard from './ProjectCard';
+import ProjectDetails from './ProjectDetails';
 
 let projectsUrl = 'http://localhost:3000/projects/'
 
@@ -18,8 +20,11 @@ class App extends Component {
     super()
     this.state = {
       projects: [],
-      UserProjects: []
-      // addedProjects: []
+      userProjects: [],
+      loggedUser: {},
+      projectForm: false,
+      project: {}
+     
     }
   }
 
@@ -31,20 +36,42 @@ class App extends Component {
     }))
   }
 
-  // addProject = (id) => {
-  //   // debugger
-  //   if(!this.state.addedProjects.includes(id)){
-  //     this.setState({
-  //       addedProjects: [...this.state.addedProjects, id]
-  //     })
-  //   }
-  // }
-
   adoptProject = (clickedProject) => {
     let newProjectArray = this.state.projects.filter(project => project !== clickedProject )
     this.setState({
       projects: newProjectArray,
       userProjects: [...this.state.userProjects, clickedProject]
+    })
+  }
+
+  createProject = (e) => {
+    debugger
+    e.preventDefault()
+    // console.log(e)
+
+    let newProject = {
+      user_id: this.state.loggedUser.id,
+      name: e.target[0].value,
+      ImageUrl: e.target[1].value
+    }
+    fetch(projectsUrl, {
+      method: "POST",
+      headers: {
+          Authorization:  `Bearer ${localStorage.token}`,
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(
+        newProject
+      )
+    })
+    .then(res => res.json())
+    .then(newProject => {
+      console.log(newProject)
+      this.setState({
+        projects: [...this.state.projects, newProject],
+        projectForm: !this.state.projectForm,
+        userProjects: [...this.state.userProjects, newProject],
+      })
     })
   }
   
@@ -66,13 +93,44 @@ class App extends Component {
 
       <Switch>
 
-          <Route path="/login" component={LogIn} />
+          <Route path="/login" 
+          component={LogIn} 
+          />
 
-          <Route path="/signup" component={SignUp} />
+          <Route path="/signup" 
+          component={SignUp} 
+          />
 
-          <Route path='/home' render={(routerProps) => <Homepage{...routerProps}/>}/>
+          <Route path='/home' render={(routerProps) => 
+            <Homepage{...routerProps}
+            />}
+            />
 
-          <Route path='/projects' render={(routerProps) => <ProjectPage{...routerProps} projects={this.state.projects}/>}/>
+          <Route exact path='/projects' render={(routerProps) => 
+            <ProjectPage {...routerProps} 
+            projects={this.state.projects}
+            loggedUser={this.state.loggedUser}
+            />}
+            />
+
+          <Route path= '/new' render={(routerProps) => 
+          <ProjectForm {...routerProps} 
+          createProject={this.createProject} 
+          projects={this.state.projects}
+          useProjects={this.state.userProjects}
+          loggedUser={this.state.loggedUser}
+          />}
+          />
+
+          <Route exact path= '/projects/:id' render={(routerProps) => 
+          <ProjectDetails {...routerProps}
+          loggedUser={this.state.loggedUser} 
+          />}
+          />
+
+          
+
+          
 
           
 

@@ -25,7 +25,8 @@ class SignUp extends Component{
             body: JSON.stringify({
             //    user:{
                 username: this.state.username,
-                password: this.state.password
+                password: this.state.password,
+                address: this.state.address
             //    }
             })
         })
@@ -41,9 +42,11 @@ class SignUp extends Component{
                 this.signUp(e) 
                 this.handleSubmit() }}>
 
-            <label>Username</label>
+            <label>Create Username</label>
             <input onChange={(e) => this.handleChange(e)} name="username" type="text" />
-            <label>Password</label>
+            <label>Your Address</label>
+            <input onChange={(e) => this.handleChange(e)} name="address" type="text" />
+            <label>Create Password</label>
             <input onChange={(e) => this.handleChange(e)} name="password" type="password" />
             <input type="submit"/>
             </form>

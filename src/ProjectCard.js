@@ -1,23 +1,15 @@
 import React from 'react'
+import ProjectDetails from './ProjectDetails'
+import { Link } from 'react-router-dom';
 
 
-class ProjectCard extends React.Component {
- state= {
-     hover: false
- }
+class ProjectCard extends React.Component { 
 
- handleClick = () => {
-     this.props.history.push({
-         pathname: `/projects/${this.props.project.id}` ,
-         project: this.props.project
-     })
- }
-
- click = () => {
-     console.log('hi')
- }
-   
-
+    handleClick = () =>{
+        this.props.history.push({
+            pathname:`/projects/${this.props.project.id}`,
+            project: this.props.project})
+    }
    
 render(){
 
