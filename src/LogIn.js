@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 
 class LogIn extends Component{
 
+    
+
     handleSubmit = () => {
 
         this.props.history.push("/projects") 
@@ -29,7 +31,9 @@ class LogIn extends Component{
         })
         .then(res => res.json())
         .then(userInfo => {
+            // debugger
             localStorage.token = userInfo.token
+            this.props.currentUser(userInfo.user_id)
         })
     }
 

@@ -21,7 +21,7 @@ class App extends Component {
     this.state = {
       projects: [],
       userProjects: [],
-      loggedUser: {},
+      loggedUser_id: '',
       projectForm: false,
       project: {}
      
@@ -46,23 +46,28 @@ class App extends Component {
 
   createProject = (e) => {
     debugger
+
     e.preventDefault()
     // console.log(e)
 
-    let newProject = {
-      user_id: this.state.loggedUser.id,
-      name: e.target[0].value,
-      ImageUrl: e.target[1].value
-    }
+    // let newProject = {
+    //   user_id: this.state.loggedUser.id,
+    //   name: e.target[0].value,
+    //   ImageUrl: e.target[1].value
+    // }
     fetch(projectsUrl, {
       method: "POST",
       headers: {
           Authorization:  `Bearer ${localStorage.token}`,
           'Content-Type': 'application/json',
       },
-      body: JSON.stringify(
-        newProject
-      )
+      body: JSON.stringify({
+      user_id: this.state.loggedUser_id,
+     
+      name: e.target[0].value,
+      ImageUrl: e.target[1].value
+      
+      })
     })
     .then(res => res.json())
     .then(newProject => {
@@ -72,6 +77,12 @@ class App extends Component {
         projectForm: !this.state.projectForm,
         userProjects: [...this.state.userProjects, newProject],
       })
+    })
+  }
+
+  currentUser = (userId) => {
+    this.setState({
+      loggedUser_id: userId
     })
   }
   
@@ -90,11 +101,13 @@ class App extends Component {
            <Header />
            <Navbar />
            <UserProfile />
+        
+          
 
       <Switch>
 
-          <Route path="/login" 
-          component={LogIn} 
+          <Route path="/login" render={(routerProps) => <LogIn {...routerProps} currentUser={this.currentUser}/>}
+           
           />
 
           <Route path="/signup" 
@@ -109,7 +122,7 @@ class App extends Component {
           <Route exact path='/projects' render={(routerProps) => 
             <ProjectPage {...routerProps} 
             projects={this.state.projects}
-            loggedUser={this.state.loggedUser}
+         
             />}
             />
 
@@ -118,13 +131,13 @@ class App extends Component {
           createProject={this.createProject} 
           projects={this.state.projects}
           useProjects={this.state.userProjects}
-          loggedUser={this.state.loggedUser}
+
           />}
           />
 
           <Route exact path= '/projects/:id' render={(routerProps) => 
           <ProjectDetails {...routerProps}
-          loggedUser={this.state.loggedUser} 
+   
           />}
           />
 
