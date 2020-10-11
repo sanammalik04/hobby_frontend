@@ -46,15 +46,7 @@ class App extends Component {
 
   createProject = (e) => {
     debugger
-
     e.preventDefault()
-    // console.log(e)
-
-    // let newProject = {
-    //   user_id: this.state.loggedUser.id,
-    //   name: e.target[0].value,
-    //   ImageUrl: e.target[1].value
-    // }
     fetch(projectsUrl, {
       method: "POST",
       headers: {
@@ -63,15 +55,13 @@ class App extends Component {
       },
       body: JSON.stringify({
       user_id: this.state.loggedUser_id,
-     
       name: e.target[0].value,
-      ImageUrl: e.target[1].value
-      
+      description: e.target[1].value,
+      ImageUrl: e.target[3].value
       })
     })
     .then(res => res.json())
     .then(newProject => {
-      console.log(newProject)
       this.setState({
         projects: [...this.state.projects, newProject],
         projectForm: !this.state.projectForm,
