@@ -13,6 +13,7 @@ import ProjectCard from './ProjectCard';
 import ProjectDetails from './ProjectDetails';
 
 let projectsUrl = 'http://localhost:3000/projects/'
+let usersUrl = 'http://localhost:3000/users/'
 
 class App extends Component {
 
@@ -28,21 +29,74 @@ class App extends Component {
     }
   }
 
-  componentDidMount(){
-    fetch(projectsUrl)
-    .then(res => res.json())
-    .then(projectArray => this.setState({
-      projects : projectArray
-    }))
-  }
+//   getPaintings = () => {
+//     // debugger
+
+//     fetch("http://localhost:3000/api/v1/paintings", {
+//       method: "GET",
+//       headers: {
+//         Authorization:  `Bearer ${localStorage.token}`
+//       }
+//     })
+//     .then(res => res.json())
+//     .then(console.log)
+// }
+
+componentDidMount(){
+  fetch(projectsUrl, {
+    method: "GET",
+    headers: {
+      Authorization:  `Bearer ${localStorage.token}`,
+      'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+  })
+  .then(res => res.json())
+  .then(projectArray => this.setState({
+    projects: projectArray
+  }))
+}
+  
+
+  // 
+  //   fetch(projectsUrl)
+  //   .then(res => res.json())
+  //   .then(projectArray => this.setState({
+  //     projects : projectArray
+  //   }))
+  // }
 
   adoptProject = (clickedProject) => {
-    let newProjectArray = this.state.projects.filter(project => project !== clickedProject )
-    this.setState({
-      projects: newProjectArray,
-      userProjects: [...this.state.userProjects, clickedProject]
+    console.log(clickedProject)
+    //let newProjectArray = this.state.projects.filter(project => project !== clickedProject )
+    //this.setState({
+     // projects: newProjectArray,
+      //userProjects: [...this.state.userProjects, clickedProject]
+    //})
+    fetch(projectsUrl, {
+      method: "POST", 
+      headers: {
+        Authorization:  `Bearer ${localStorage.token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+          user_id: this.state.loggedUser_id,
+          name: clickedProject.name,
+          description: clickedProject.description,
+          ImageUrl: clickedProject.ImageUrl
+      })
     })
+     .then(resp => resp.json())
+     .then(clickedProject => {
+       this.setState({
+        userProjects: [...this.state.userProjects, clickedProject],
+       })
+     })
   }
+
+     //using clickedProject.id find the relevant supplies and also link to this new project
+  
 
   createProject = (e) => {
     debugger
@@ -89,9 +143,7 @@ class App extends Component {
 
     <div>
            <Header />
-           <Navbar />
-           <UserProfile />
-        
+           <Navbar />     
           
 
       <Switch>
@@ -112,7 +164,8 @@ class App extends Component {
           <Route exact path='/projects' render={(routerProps) => 
             <ProjectPage {...routerProps} 
             projects={this.state.projects}
-         
+            adoptProject={this.adoptProject}
+   
             />}
             />
 
@@ -127,7 +180,15 @@ class App extends Component {
 
           <Route exact path= '/projects/:id' render={(routerProps) => 
           <ProjectDetails {...routerProps}
-   
+          adoptProject={this.adoptProject}
+          />}
+          />
+
+          <Route path='/my-project/:id' render={(routerProps) => 
+          <UserProfile {...routerProps} 
+          adoptProject={this.adoptProject}
+          userProjects={this.state.userProjects}
+          createProject={this.createProject}
           />}
           />
 

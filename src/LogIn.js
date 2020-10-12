@@ -5,7 +5,7 @@ class LogIn extends Component{
     
 
     handleSubmit = () => {
-
+    
         this.props.history.push("/projects") 
     }
 
