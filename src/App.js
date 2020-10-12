@@ -22,25 +22,12 @@ class App extends Component {
     this.state = {
       projects: [],
       userProjects: [],
-      loggedUser_id: '',
+      loggedUser_id: localStorage.currentUser,
       projectForm: false,
       project: {}
      
     }
   }
-
-//   getPaintings = () => {
-//     // debugger
-
-//     fetch("http://localhost:3000/api/v1/paintings", {
-//       method: "GET",
-//       headers: {
-//         Authorization:  `Bearer ${localStorage.token}`
-//       }
-//     })
-//     .then(res => res.json())
-//     .then(console.log)
-// }
 
 componentDidMount(){
   fetch(projectsUrl, {
@@ -84,13 +71,15 @@ componentDidMount(){
           user_id: this.state.loggedUser_id,
           name: clickedProject.name,
           description: clickedProject.description,
-          ImageUrl: clickedProject.ImageUrl
+          ImageUrl: clickedProject.ImageUrl,
+          original: false
+
       })
     })
      .then(resp => resp.json())
      .then(clickedProject => {
        this.setState({
-        userProjects: [...this.state.userProjects, clickedProject],
+        userProjects: [...this.state.userProjects, clickedProject]
        })
      })
   }
@@ -99,7 +88,7 @@ componentDidMount(){
   
 
   createProject = (e) => {
-    debugger
+    // debugger
     e.preventDefault()
     fetch(projectsUrl, {
       method: "POST",
@@ -111,7 +100,8 @@ componentDidMount(){
       user_id: this.state.loggedUser_id,
       name: e.target[0].value,
       description: e.target[1].value,
-      ImageUrl: e.target[3].value
+      ImageUrl: e.target[3].value,
+      original: true
       })
     })
     .then(res => res.json())

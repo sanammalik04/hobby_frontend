@@ -33,13 +33,16 @@ class LogIn extends Component{
         .then(userInfo => {
             // debugger
             localStorage.token = userInfo.token
+            localStorage.currentUser = userInfo.user_id
             this.props.currentUser(userInfo.user_id)
+            // localStorage.currentUser = userInfo.user_id
+        
         })
     }
-
+    
     render(){
         return(
-        <div>
+            <div>
              <h2>Login</h2>
             <form onSubmit={(e) => {
                 this.login(e)
