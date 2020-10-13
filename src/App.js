@@ -21,10 +21,10 @@ class App extends Component {
     super()
     this.state = {
       projects: [],
-      userProjects: [],
       loggedUser_id: localStorage.currentUser,
       projectForm: false,
-      project: {}
+      project: {},
+      users: []
      
     }
   }
@@ -42,16 +42,8 @@ componentDidMount(){
   .then(projectArray => this.setState({
     projects: projectArray
   }))
+  this.userProjects()
 }
-  
-
-  // 
-  //   fetch(projectsUrl)
-  //   .then(res => res.json())
-  //   .then(projectArray => this.setState({
-  //     projects : projectArray
-  //   }))
-  // }
 
   adoptProject = (clickedProject) => {
     console.log(clickedProject)
@@ -77,11 +69,6 @@ componentDidMount(){
       })
     })
      .then(resp => resp.json())
-     .then(clickedProject => {
-       this.setState({
-        userProjects: [...this.state.userProjects, clickedProject]
-       })
-     })
   }
 
      //using clickedProject.id find the relevant supplies and also link to this new project
@@ -119,7 +106,28 @@ componentDidMount(){
       loggedUser_id: userId
     })
   }
-  
+
+  userProjects = () => {
+    fetch(usersUrl + localStorage.currentUser, {
+        method: "GET",
+        headers: {
+            Authorization:  `Bearer ${localStorage.token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+
+    })
+    .then(res => res.json())
+    .then(userArray => this.setState({
+      users: userArray
+    }))
+
+}
+  // deleteMyProject = (project) => {
+  //   let user = this.state.loggedUser_id
+  //   let removeProject = project
+
+  // }
 
   
 
@@ -133,9 +141,10 @@ componentDidMount(){
 
     <div>
            <Header />
-           <Navbar />     
+           <Navbar />
           
 
+       
       <Switch>
 
           <Route path="/login" render={(routerProps) => <LogIn {...routerProps} currentUser={this.currentUser}/>}
@@ -174,11 +183,11 @@ componentDidMount(){
           />}
           />
 
-          <Route path='/my-project/:id' render={(routerProps) => 
+          <Route path='/my-projects' render={(routerProps) => 
           <UserProfile {...routerProps} 
           adoptProject={this.adoptProject}
-          userProjects={this.state.userProjects}
           createProject={this.createProject}
+          users={this.state.users}
           />}
           />
 

@@ -35,7 +35,7 @@ class LogIn extends Component{
             localStorage.token = userInfo.token
             localStorage.currentUser = userInfo.user_id
             this.props.currentUser(userInfo.user_id)
-            // localStorage.currentUser = userInfo.user_id
+           
         
         })
     }
