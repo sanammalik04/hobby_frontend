@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 
 const ProjectDetails = (props) => {
 
+    // const handleClick = () => {
+    //     props.history.push({
+    //         pathname: '/my-projects'
+    //     })
+    // }
 
     return(
         <div>

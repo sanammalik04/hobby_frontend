@@ -11,6 +11,8 @@ import ProjectPage from './ProjectPage';
 import ProjectForm from './ProjectForm';
 import ProjectCard from './ProjectCard';
 import ProjectDetails from './ProjectDetails';
+import UserCard from './UserCard';
+import UserProjectDetails from './UserProjectDetails';
 
 let projectsUrl = 'http://localhost:3000/projects/'
 let usersUrl = 'http://localhost:3000/users/'
@@ -69,6 +71,7 @@ componentDidMount(){
       })
     })
      .then(resp => resp.json())
+     .then(console.log())
   }
 
      //using clickedProject.id find the relevant supplies and also link to this new project
@@ -96,7 +99,7 @@ componentDidMount(){
       this.setState({
         projects: [...this.state.projects, newProject],
         projectForm: !this.state.projectForm,
-        userProjects: [...this.state.userProjects, newProject],
+        users: [...this.state.users, newProject],
       })
     })
   }
@@ -119,15 +122,25 @@ componentDidMount(){
     })
     .then(res => res.json())
     .then(userArray => this.setState({
-      users: userArray
+      users: userArray.projects
     }))
 
 }
-  // deleteMyProject = (project) => {
-  //   let user = this.state.loggedUser_id
-  //   let removeProject = project
+  deleteMyProject = (project) => {
+    // debugger
+    console.log(project)
+    fetch(projectsUrl + project.id, {
+      method: "DELETE",
+      headers: {
+        Authorization:  `Bearer ${localStorage.token}`,
+      }
+    })
+    let myProject = this.state.projects.filter(projectObj => projectObj !== project)
+    this.setState({
+      projects: myProject
+    })
 
-  // }
+  }
 
   
 
@@ -188,6 +201,13 @@ componentDidMount(){
           adoptProject={this.adoptProject}
           createProject={this.createProject}
           users={this.state.users}
+          deleteMyProject={this.deleteMyProject}
+          />}
+          />
+
+          <Route exact path="/my-projects/:id" 
+          render={(routerProps) => 
+            <UserProjectDetails {...routerProps}
           />}
           />
 

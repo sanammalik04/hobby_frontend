@@ -11,7 +11,17 @@ const UserProfile = (props) => {
     return(
         <div>
             
-          <h1>hello User</h1>
+          {/* <h1>hello User</h1> */}
+          {props.users.map(userProject => 
+          <UserCard 
+          key={userProject.id} 
+          userProject={userProject} 
+          loggedUser={props.loggedUser} 
+          history={props.history} 
+          adoptProject={() => props.adoptProject(props.clickedProject)}
+          deleteMyProject={() => props.deleteMyProject(userProject)}
+          
+          />)}
 
         </div>
     )
