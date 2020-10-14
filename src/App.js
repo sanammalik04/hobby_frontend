@@ -104,6 +104,8 @@ componentDidMount(){
     // debugger
     let createdProjectSupplies =  e.target.supplies.value.split(",")
     console.log(createdProjectSupplies)
+
+    //call fetch request here and return json response
     e.preventDefault()
     fetch(projectsUrl, {
       method: "POST",
@@ -116,59 +118,34 @@ componentDidMount(){
       name: e.target[0].value,
       description: e.target[1].value,
       ImageUrl: e.target[3].value,
-      //supplies: e.target.supplies.value.split(","),
+      supplies: createdProjectSupplies,
       original: true
       })
     })
-    .then(res => console.log(res.json()))
-    .then(function (data){
-      let projectData = data
-      //console.log(createdProjectSupplies)
-      const promises = createdProjectSupplies.map(supply => {
-        console.log(supply)
-        return fetch(suppliesUrl, {
-          method: "POST", 
-          headers: {
-            Authorization:  `Bearer ${localStorage.token}`,
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-              name: supply,
-            
-          })
-        })
-       .then(resp => {return resp.json()})
-      })
-         Promise.all(promises).then((results) => (projectData) => {
-           console.log(results)
-           console.log(projectData)
-      })
-     })
-    //  .then(function (results, projectData){
-    //    console.log(projectData)
-    //    console.log(results)})
-      //console.log(createdProjectSupplies)
-    //   const promises = createdProjectSupplies.map(supply => {
-    //     console.log(supply)
-    //     return fetch(suppliesUrl, {
-    //       method: "POST", 
-    //       headers: {
-    //         Authorization:  `Bearer ${localStorage.token}`,
-    //         'Content-Type': 'application/json',
-    //         'Accept': 'application/json'
-    //       },
-    //       body: JSON.stringify({
-    //           name: supply
-    //       })
-    //     })
-    //    .then(resp => {return resp.json()})
-    //   })
-    //   Promise.all(promises).then(results=> {
-    //     console.log(results)
-    //   })
-    //  })
+    .then(res => {return (res.json())})
+
   }
+
+  //   const promise2 = createdProjectSupplies.map(supply => {
+  //       return fetch(suppliesUrl, {
+  //       method: "POST", 
+  //       headers: {
+  //         Authorization:  `Bearer ${localStorage.token}`,
+  //         'Content-Type': 'application/json',
+  //         'Accept': 'application/json'
+  //       },
+  //       body: JSON.stringify({
+  //           name: supply
+  //       })
+  //     })
+  //     .then(resp => {return resp})
+  //   })
+  //   Promise.all([promise2]).then((results) => {
+  //        console.log(results)
+  //   })
+  // }
+  
+    
 
 
   currentUser = (userId) => {
@@ -190,7 +167,7 @@ componentDidMount(){
     .then(res => res.json())
     .then(userArray => this.setState({
       users: userArray.projects,
-      userSupplies: userArray.projects.map(project =>project.supplies)
+      // userSupplies: userArray.projects.map(project =>project.supplies)
     }))
 
 }
@@ -270,11 +247,12 @@ componentDidMount(){
           />}
           />
 
-          <Route exact path= '/projects/:id' render={(routerProps) => 
-          <ProjectDetails {...routerProps}
-          adoptProject={this.adoptProject}
-          />}
-          />
+          <Route path= '/projects/:id' render={(routerProps) => {
+            let id = parseInt(routerProps.match.params.id)
+            let projectShowpage = this.state.projects.find(project => project.id === id)
+            return <ProjectDetails {...routerProps} projectShowpage={projectShowpage} adoptProject={this.adoptProject} />
+          }}/>
+          
 
           <Route exact path='/my-projects' render={(routerProps) => 
           <UserProfile {...routerProps} 
