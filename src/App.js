@@ -101,7 +101,9 @@ componentDidMount(){
   
 
   createProject = (e) => {
-    //debugger
+    // debugger
+    let createdProjectSupplies =  e.target.supplies.value.split(",")
+    console.log(createdProjectSupplies)
     e.preventDefault()
     fetch(projectsUrl, {
       method: "POST",
@@ -114,20 +116,60 @@ componentDidMount(){
       name: e.target[0].value,
       description: e.target[1].value,
       ImageUrl: e.target[3].value,
-      supplies: e.target[2].value,
+      //supplies: e.target.supplies.value.split(","),
       original: true
       })
     })
-    .then(res => res.json())
-    .then(newProject => {
-      this.setState({
-        projects: [...this.state.projects, newProject],
-        projectForm: !this.state.projectForm,
-        users: [...this.state.users, newProject],
-        userSupplies: [...this.state.userSupplies, newProject]
+    .then(res => console.log(res.json()))
+    .then(function (data){
+      let projectData = data
+      //console.log(createdProjectSupplies)
+      const promises = createdProjectSupplies.map(supply => {
+        console.log(supply)
+        return fetch(suppliesUrl, {
+          method: "POST", 
+          headers: {
+            Authorization:  `Bearer ${localStorage.token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+              name: supply,
+            
+          })
+        })
+       .then(resp => {return resp.json()})
       })
-    })
+         Promise.all(promises).then((results) => (projectData) => {
+           console.log(results)
+           console.log(projectData)
+      })
+     })
+    //  .then(function (results, projectData){
+    //    console.log(projectData)
+    //    console.log(results)})
+      //console.log(createdProjectSupplies)
+    //   const promises = createdProjectSupplies.map(supply => {
+    //     console.log(supply)
+    //     return fetch(suppliesUrl, {
+    //       method: "POST", 
+    //       headers: {
+    //         Authorization:  `Bearer ${localStorage.token}`,
+    //         'Content-Type': 'application/json',
+    //         'Accept': 'application/json'
+    //       },
+    //       body: JSON.stringify({
+    //           name: supply
+    //       })
+    //     })
+    //    .then(resp => {return resp.json()})
+    //   })
+    //   Promise.all(promises).then(results=> {
+    //     console.log(results)
+    //   })
+    //  })
   }
+
 
   currentUser = (userId) => {
     this.setState({
@@ -164,9 +206,12 @@ componentDidMount(){
     let myProject = this.state.projects.filter(projectObj => projectObj !== project)
     this.setState({
       projects: myProject
+      
     })
-
   }
+
+
+  
 
  
 
@@ -218,6 +263,9 @@ componentDidMount(){
           projects={this.state.projects}
           useProjects={this.state.userProjects}
           userSupplies={this.state.userSupplies}
+          handleSupplyDelete={this.handleSupplyDelete}
+          handleSupplyFormText={this.handleSupplyFormText}
+          addSupply={this.addSupply}
 
           />}
           />

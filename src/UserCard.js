@@ -5,11 +5,16 @@ import { Link } from 'react-router-dom';
 
 class UserCard extends React.Component {
 
+
+
     handleClick = () =>{
         this.props.history.push({
             pathname:`/my-projects/${this.props.userProject.id}`,
             userProject: this.props.userProject})
+           
     }
+
+
 
   
   
@@ -28,6 +33,8 @@ render(){
             </div>
             
             <button onClick={() => this.props.deleteMyProject(this.props.userProject.id)}>Delete My Project</button>
+
+
 
 
         </div>
