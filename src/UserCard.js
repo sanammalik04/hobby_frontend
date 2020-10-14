@@ -10,6 +10,9 @@ class UserCard extends React.Component {
             pathname:`/my-projects/${this.props.userProject.id}`,
             userProject: this.props.userProject})
     }
+
+  
+  
    
 render(){
 

@@ -21,7 +21,8 @@ const ProjectForm = (props) => {
               }>
                    <input type='text' placeholder='Project Name' name='name'  /><br></br><br></br>
                    <textarea type='text' placeholder='Description'name='description'  /><br></br><br></br>
-                   <textarea type='text' placeholder='Supplies Needed' name='supplies'  /><br></br><br></br>
+                   {/* <input name="supplyOne" value={} /> */}
+                   {/* <textarea type='text' placeholder='Supplies Needed' name="supplies"  /><br></br><br></br> */}
                    <input type='text' placeholder='Finished Project Photo' name='ImageUrl'  /><br></br><br></br>
                   <input type='submit' value='Add Project' /><br></br><br></br>
               </form>

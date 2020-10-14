@@ -16,6 +16,11 @@ import UserProjectDetails from './UserProjectDetails';
 
 let projectsUrl = 'http://localhost:3000/projects/'
 let usersUrl = 'http://localhost:3000/users/'
+let suppliesUrl = 'http://localhost:3000/supplies/'
+let projectSuppliesUrl = 'http://localhost:3000/project_supplies/'
+
+
+
 
 class App extends Component {
 
@@ -26,7 +31,8 @@ class App extends Component {
       loggedUser_id: localStorage.currentUser,
       projectForm: false,
       project: {},
-      users: []
+      users: [],
+      userSupplies: []
      
     }
   }
@@ -47,13 +53,9 @@ componentDidMount(){
   this.userProjects()
 }
 
+
   adoptProject = (clickedProject) => {
-    console.log(clickedProject)
-    //let newProjectArray = this.state.projects.filter(project => project !== clickedProject )
-    //this.setState({
-     // projects: newProjectArray,
-      //userProjects: [...this.state.userProjects, clickedProject]
-    //})
+    let clickedProjectSupplies = clickedProject.supplies
     fetch(projectsUrl, {
       method: "POST", 
       headers: {
@@ -71,14 +73,35 @@ componentDidMount(){
       })
     })
      .then(resp => resp.json())
-     .then(console.log())
+     .then(function (data){
+      console.log(clickedProjectSupplies)
+      const promises = clickedProjectSupplies.map(supply => {
+        console.log(supply)
+        return fetch(projectSuppliesUrl, {
+          method: "POST", 
+          headers: {
+            Authorization:  `Bearer ${localStorage.token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+              supply_id: supply.id,
+              project_id: data.id
+          })
+        })
+       .then(resp => {return resp.json()})
+      })
+      Promise.all(promises).then(results=> {
+        console.log(results)
+      })
+     })
   }
 
      //using clickedProject.id find the relevant supplies and also link to this new project
   
 
   createProject = (e) => {
-    // debugger
+    //debugger
     e.preventDefault()
     fetch(projectsUrl, {
       method: "POST",
@@ -91,6 +114,7 @@ componentDidMount(){
       name: e.target[0].value,
       description: e.target[1].value,
       ImageUrl: e.target[3].value,
+      supplies: e.target[2].value,
       original: true
       })
     })
@@ -100,6 +124,7 @@ componentDidMount(){
         projects: [...this.state.projects, newProject],
         projectForm: !this.state.projectForm,
         users: [...this.state.users, newProject],
+        userSupplies: [...this.state.userSupplies, newProject]
       })
     })
   }
@@ -122,7 +147,8 @@ componentDidMount(){
     })
     .then(res => res.json())
     .then(userArray => this.setState({
-      users: userArray.projects
+      users: userArray.projects,
+      userSupplies: userArray.projects.map(project =>project.supplies)
     }))
 
 }
@@ -142,6 +168,8 @@ componentDidMount(){
 
   }
 
+ 
+
   
 
 
@@ -160,7 +188,9 @@ componentDidMount(){
        
       <Switch>
 
-          <Route path="/login" render={(routerProps) => <LogIn {...routerProps} currentUser={this.currentUser}/>}
+          <Route path="/login" render={(routerProps) => 
+          <LogIn {...routerProps} 
+          currentUser={this.currentUser}/>}
            
           />
 
@@ -177,6 +207,7 @@ componentDidMount(){
             <ProjectPage {...routerProps} 
             projects={this.state.projects}
             adoptProject={this.adoptProject}
+            userSupplies={this.state.userSupplies}
    
             />}
             />
@@ -186,6 +217,7 @@ componentDidMount(){
           createProject={this.createProject} 
           projects={this.state.projects}
           useProjects={this.state.userProjects}
+          userSupplies={this.state.userSupplies}
 
           />}
           />
@@ -196,18 +228,21 @@ componentDidMount(){
           />}
           />
 
-          <Route path='/my-projects' render={(routerProps) => 
+          <Route exact path='/my-projects' render={(routerProps) => 
           <UserProfile {...routerProps} 
           adoptProject={this.adoptProject}
           createProject={this.createProject}
           users={this.state.users}
+          userSupplies={this.state.userSupplies}
           deleteMyProject={this.deleteMyProject}
+          userSupplies={this.state.userSupplies}
           />}
           />
 
           <Route exact path="/my-projects/:id" 
           render={(routerProps) => 
             <UserProjectDetails {...routerProps}
+       
           />}
           />
 

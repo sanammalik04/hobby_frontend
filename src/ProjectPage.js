@@ -18,6 +18,7 @@ return(
         loggedUser={props.loggedUser}
         history={props.history}
         adoptProject={() => props.adoptProject(props.clickedProject)}
+        userSupplie={props.userSupplies}
    
     
         />)}
