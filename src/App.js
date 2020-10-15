@@ -32,7 +32,8 @@ class App extends Component {
       projectForm: false,
       project: {},
       users: [],
-      userSupplies: []
+      userSupplies: [],
+    
      
     }
   }
@@ -51,11 +52,14 @@ componentDidMount(){
     projects: projectArray
   }))
   this.userProjects()
+  
 }
 
 
   adoptProject = (clickedProject) => {
-    let clickedProjectSupplies = clickedProject.supplies
+    let clickedProjectSupplies = []
+    clickedProject.supplies.map(supply => 
+      clickedProjectSupplies.push(supply.name))
     fetch(projectsUrl, {
       method: "POST", 
       headers: {
@@ -68,44 +72,41 @@ componentDidMount(){
           name: clickedProject.name,
           description: clickedProject.description,
           ImageUrl: clickedProject.ImageUrl,
+          supplies: clickedProjectSupplies,
           original: false
 
       })
     })
      .then(resp => resp.json())
-     .then(function (data){
-      console.log(clickedProjectSupplies)
-      const promises = clickedProjectSupplies.map(supply => {
-        console.log(supply)
-        return fetch(projectSuppliesUrl, {
-          method: "POST", 
-          headers: {
-            Authorization:  `Bearer ${localStorage.token}`,
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-              supply_id: supply.id,
-              project_id: data.id
-          })
-        })
-       .then(resp => {return resp.json()})
-      })
-      Promise.all(promises).then(results=> {
-        console.log(results)
-      })
-     })
-  }
-
-     //using clickedProject.id find the relevant supplies and also link to this new project
+    //  .then(function (data){
+    //   console.log(clickedProjectSupplies)
+    //   const promises = clickedProjectSupplies.map(supply => {
+    //     return fetch(projectSuppliesUrl, {
+    //       method: "POST", 
+    //       headers: {
+    //         Authorization:  `Bearer ${localStorage.token}`,
+    //         'Content-Type': 'application/json',
+    //         'Accept': 'application/json'
+    //       },
+    //       body: JSON.stringify({
+    //           supply_id: supply.id,
+    //           project_id: data.id
+    //       })
+    //     })
+    //    .then(resp => {return resp.json()})
+    //   })
+    //   Promise.all(promises).then(results=> {
+    //     console.log(results)
+    //   })
+    //  })
+    }
   
+
 
   createProject = (e) => {
     // debugger
     let createdProjectSupplies =  e.target.supplies.value.split(",")
     console.log(createdProjectSupplies)
-
-    //call fetch request here and return json response
     e.preventDefault()
     fetch(projectsUrl, {
       method: "POST",
@@ -123,30 +124,7 @@ componentDidMount(){
       })
     })
     .then(res => {return (res.json())})
-
   }
-
-  //   const promise2 = createdProjectSupplies.map(supply => {
-  //       return fetch(suppliesUrl, {
-  //       method: "POST", 
-  //       headers: {
-  //         Authorization:  `Bearer ${localStorage.token}`,
-  //         'Content-Type': 'application/json',
-  //         'Accept': 'application/json'
-  //       },
-  //       body: JSON.stringify({
-  //           name: supply
-  //       })
-  //     })
-  //     .then(resp => {return resp})
-  //   })
-  //   Promise.all([promise2]).then((results) => {
-  //        console.log(results)
-  //   })
-  // }
-  
-    
-
 
   currentUser = (userId) => {
     this.setState({
@@ -166,8 +144,8 @@ componentDidMount(){
     })
     .then(res => res.json())
     .then(userArray => this.setState({
-      users: userArray.projects,
-      // userSupplies: userArray.projects.map(project =>project.supplies)
+      users: userArray.projects
+      //userSupplies: userArray.projects.map(project =>project.supplies)
     }))
 
 }
@@ -183,9 +161,10 @@ componentDidMount(){
     let myProject = this.state.projects.filter(projectObj => projectObj !== project)
     this.setState({
       projects: myProject
-      
     })
   }
+
+  
 
 
   
@@ -250,7 +229,9 @@ componentDidMount(){
           <Route path= '/projects/:id' render={(routerProps) => {
             let id = parseInt(routerProps.match.params.id)
             let projectShowpage = this.state.projects.find(project => project.id === id)
-            return <ProjectDetails {...routerProps} projectShowpage={projectShowpage} adoptProject={this.adoptProject} />
+            return <ProjectDetails {...routerProps} 
+            projectShowpage={projectShowpage} 
+            adoptProject={this.adoptProject} />
           }}/>
           
 
