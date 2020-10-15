@@ -19,7 +19,7 @@ const ProjectDetails = (props) => {
             <h1>Supplies Needed</h1>
             <ul>{props.projectShowpage.supplies.map(supplies => <li>{supplies.name}</li>)}</ul>
             <button onClick={() => props.adoptProject(props.projectShowpage)}>Add to My Projects</button><br></br><br></br>
-            <Link to="/projects"> All Projects </Link><br></br> 
+            <Link to="/projects" projects={props.projects}> All Projects </Link><br></br> 
             </div>
             : null}
         </div>

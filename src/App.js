@@ -14,7 +14,8 @@ import ProjectDetails from './ProjectDetails';
 import UserCard from './UserCard';
 import UserProjectDetails from './UserProjectDetails';
 import TrashNothing from './TrashNothing';
-import TrashCard from './TrashCard';
+import TrashDetails from './TrashDetails';
+
 
 let projectsUrl = 'http://localhost:3000/projects/'
 let usersUrl = 'http://localhost:3000/users/'
@@ -206,7 +207,7 @@ trashItems = () => {
 
     <div>
            <Header />
-           <Navbar />
+           <Navbar users={this.state.users} projects={this.state.projects} trash={this.state.trash} />
          
 
        
@@ -242,10 +243,6 @@ trashItems = () => {
           projects={this.state.projects}
           useProjects={this.state.userProjects}
           userSupplies={this.state.userSupplies}
-          handleSupplyDelete={this.handleSupplyDelete}
-          handleSupplyFormText={this.handleSupplyFormText}
-          addSupply={this.addSupply}
-
           />}
           />
 
@@ -254,7 +251,8 @@ trashItems = () => {
             let projectShowpage = this.state.projects.find(project => project.id === id)
             return <ProjectDetails {...routerProps} 
             projectShowpage={projectShowpage} 
-            adoptProject={this.adoptProject} />
+            adoptProject={this.adoptProject}
+            projects={this.state.projects} />
           }}/>
           
 
@@ -282,6 +280,13 @@ trashItems = () => {
           trash={this.state.trash}
 
           
+          />}
+          />
+
+          <Route exact path="/my-projects/post_id" 
+          render={(routerProps) => 
+            <TrashDetails {...routerProps}
+       
           />}
           />
 

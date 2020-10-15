@@ -2,22 +2,21 @@ import React from 'react'
 import TrashCard from './TrashCard'
 
 const TrashNothing = (props) => {
-
+console.log(props)
     return(
         <div>
-            {props.Trash?
+            {props.trash?
             <div>
 
-            {props.Trash.map(item => 
+            {props.trash.map(trash => 
             <TrashCard 
-            key={item.id}
-            item={item}
-            trash={props.trash}
+            key={trash.id}
+            trash={trash}
             history={props.history}
             />)}
             </div>
 
-            : null}
+             : null} 
         
         </div>
     )
