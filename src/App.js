@@ -283,9 +283,9 @@ trashItems = () => {
           />}
           />
 
-          <Route exact path="/my-projects/post_id" 
+          <Route exact path="/my-supplies/post_id"
           render={(routerProps) => 
-            <TrashDetails {...routerProps}
+          <TrashDetails {...routerProps}
        
           />}
           />
