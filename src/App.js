@@ -13,7 +13,8 @@ import ProjectCard from './ProjectCard';
 import ProjectDetails from './ProjectDetails';
 import UserCard from './UserCard';
 import UserProjectDetails from './UserProjectDetails';
-import Trash from './Trash'
+import TrashNothing from './TrashNothing';
+import TrashCard from './TrashCard';
 
 let projectsUrl = 'http://localhost:3000/projects/'
 let usersUrl = 'http://localhost:3000/users/'
@@ -206,7 +207,7 @@ trashItems = () => {
     <div>
            <Header />
            <Navbar />
-          
+         
 
        
       <Switch>
@@ -275,7 +276,14 @@ trashItems = () => {
           />}
           />
 
+          <Route path="/find-supplies"
+          render={(routerProps) => 
+          <TrashNothing {...routerProps}
+          trash={this.state.trashNothing}
+
           
+          />}
+          />
 
           
 

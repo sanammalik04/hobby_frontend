@@ -24,9 +24,9 @@ render(){
             
             
 
-            header= <h3>{name}</h3>
+            <h3>{name}</h3>
             <div>
-                image= <img onClick={this.handleClick} src={ImageUrl} alt='' height="340px" width="265px"></img>
+            <img onClick={this.handleClick} src={ImageUrl} alt='' height="340px" width="265px"></img>
             </div>
 
             
