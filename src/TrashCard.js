@@ -11,9 +11,9 @@ class TrashCard extends React.Component {
         return(
             <div>
 
-                <h3>{this.props.title}</h3>
+                <h3>{this.props.trash.title}</h3>
                 <div>
-                    <img src={this.props.url} alt='' height="340px" width="265px"></img>
+                    <img src={this.props.trash.url} alt='' height="340px" width="265px"></img>
                 </div>
 
             </div>

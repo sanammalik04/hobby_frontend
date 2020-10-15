@@ -36,7 +36,7 @@ class App extends Component {
       project: {},
       users: [],
       userSupplies: [],
-      trashNothing: []
+      trash: []
     
      
     }
@@ -71,7 +71,7 @@ trashItems = () => {
   })
   .then(res => res.json())
   .then(trashData => this.setState({
-    trashNothing: trashData.posts
+    trash: trashData.posts
   }))
   
 }
@@ -279,7 +279,7 @@ trashItems = () => {
           <Route path="/find-supplies"
           render={(routerProps) => 
           <TrashNothing {...routerProps}
-          trash={this.state.trashNothing}
+          trash={this.state.trash}
 
           
           />}
