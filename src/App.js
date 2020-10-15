@@ -13,11 +13,13 @@ import ProjectCard from './ProjectCard';
 import ProjectDetails from './ProjectDetails';
 import UserCard from './UserCard';
 import UserProjectDetails from './UserProjectDetails';
+import Trash from './Trash'
 
 let projectsUrl = 'http://localhost:3000/projects/'
 let usersUrl = 'http://localhost:3000/users/'
 let suppliesUrl = 'http://localhost:3000/supplies/'
 let projectSuppliesUrl = 'http://localhost:3000/project_supplies/'
+let trashUrl = "https://trashnothing.com/api/v1.2/posts/search?search=crafts&sort_by=relevance&types=offer&sources=trashnothing&per_page=20&page=1&device_pixel_ratio=1&latitude=38.8890624&longitude=-76.9785856&radius=160934&api_key=d3rI3vCu9OPCizgN3H6xThrgpAcdg4ZueAbGTVkK"
 
 
 
@@ -33,6 +35,7 @@ class App extends Component {
       project: {},
       users: [],
       userSupplies: [],
+      trashNothing: []
     
      
     }
@@ -52,8 +55,27 @@ componentDidMount(){
     projects: projectArray
   }))
   this.userProjects()
+  this.trashItems()
+}
+
+trashItems = () => {
+  fetch(trashUrl, {
+      method: "GET",
+      headers: {
+          Authorization:  `Bearer ${localStorage.token}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+      }
+
+  })
+  .then(res => res.json())
+  .then(trashData => this.setState({
+    trashNothing: trashData.posts
+  }))
   
 }
+
+
 
 
   adoptProject = (clickedProject) => {
@@ -226,7 +248,7 @@ componentDidMount(){
           />}
           />
 
-          <Route path= '/projects/:id' render={(routerProps) => {
+          <Route exact path= '/projects/:id' render={(routerProps) => {
             let id = parseInt(routerProps.match.params.id)
             let projectShowpage = this.state.projects.find(project => project.id === id)
             return <ProjectDetails {...routerProps} 

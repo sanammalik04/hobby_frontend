@@ -10,8 +10,12 @@ const UserProfile = (props) => {
 
     return(
         <div>
+
+         
             
-          {/* <h1>hello User</h1> */}
+         {props.users ? 
+         <div>
+
           {props.users.map(userProject => 
           <UserCard 
           key={userProject.id} 
@@ -22,6 +26,8 @@ const UserProfile = (props) => {
           deleteMyProject={() => props.deleteMyProject(userProject)}
           
           />)}
+          </div>
+          : null }
 
         </div>
     )

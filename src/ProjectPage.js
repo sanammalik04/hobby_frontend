@@ -22,8 +22,8 @@ return(
    
     
         />)}
-        <Link to="/new"> Add Your Project </Link><br></br> 
-        <Link to="/my-projects"> My Projects </Link> 
+        {/* <Link to="/new"> Add Your Project </Link><br></br>  */}
+        {/* <Link to="/my-projects"> My Projects </Link>  */}
 
 
     </div>

@@ -1,4 +1,6 @@
 import React from 'react'
+import UserProfile from './UserProfile'
+import { Link }  from 'react-router-dom'
 
 let home = 'http://localhost:3001/home'
 
@@ -11,16 +13,9 @@ export const Navbar = (props) => {
     }
     return(
         <div>
-             {/* <div className={`ui inverted ${props.color} menu`}>
-                <a className='item'>
-                <h2 className="ui header">
-                    <i className={`${props.icon} icon`}></i>
-                    <div className="content">
-                        {props.text}
-                    </div>
-                </h2>
-                </a>
-            </div>  */}
+            
+            <Link to="/my-projects"> My Projects </Link><br></br>
+            <Link to="/new"> Add Your Project </Link><br></br> 
             <button onClick={logout}>Logout</button>
         </div>
     )
