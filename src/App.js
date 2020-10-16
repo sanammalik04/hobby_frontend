@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Header from './Header';
+import HeaderOne from './HeaderOne';
 import Homepage from './Homepage';
 import Navbar from './Navbar';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
@@ -15,6 +15,7 @@ import UserCard from './UserCard';
 import UserProjectDetails from './UserProjectDetails';
 import TrashNothing from './TrashNothing';
 import TrashDetails from './TrashDetails';
+
 
 
 let projectsUrl = 'http://localhost:3000/projects/'
@@ -188,6 +189,8 @@ trashItems = () => {
     })
   }
 
+
+
   
 
 
@@ -205,13 +208,22 @@ trashItems = () => {
 
       <BrowserRouter>
 
-    <div>
-           <Header />
+    <div className= "App">
+           {this.state.loggedUser_id ?
+           <div> 
            <Navbar users={this.state.users} projects={this.state.projects} trash={this.state.trash} />
+           </div>
+
+          :null}<br></br>
+          
+          <HeaderOne />
+
+
          
 
        
       <Switch>
+        
 
           <Route path="/login" render={(routerProps) => 
           <LogIn {...routerProps} 

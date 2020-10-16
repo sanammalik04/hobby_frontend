@@ -1,6 +1,29 @@
 .App {
+  background-color: rgb(250, 233, 212);
+  color: rgb(209, 167, 50);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.User-Project{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  background-color:beige;
+  color: brown;
+  padding: 1rem;
+  width: 18rem;
+  height: 28rem;
+  display: inline-grid;
+  margin: 4rem 4rem; 
+  /* cursor: pointer; */
+
+}
+
+.welcome{
   text-align: center;
 }
+
+
 
 .App-logo {
   height: 40vmin;
