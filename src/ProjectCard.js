@@ -23,18 +23,22 @@ render(){
         <div>
             
             
-            <Grid verticalAlign='middle' columns={5} centered>
+            <Grid verticalAlign='middle' columns={5} centered >
             <Grid.Row>
                 <Grid.Column>
             <Card>
             <h3>{name}</h3>
-            <div>
+            <div className="projectCard">
             <img onClick={this.handleClick} src={ImageUrl} alt='' height="340px" width="265px"></img>
             </div>
             </Card>
             </Grid.Column>
             </Grid.Row>
             </Grid>
+
+           
+
+            
 
             
     

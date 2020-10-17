@@ -18,6 +18,7 @@ import TrashDetails from './TrashDetails';
 
 
 
+
 let projectsUrl = 'http://localhost:3000/projects/'
 let usersUrl = 'http://localhost:3000/users/'
 let suppliesUrl = 'http://localhost:3000/supplies/'
@@ -38,7 +39,8 @@ class App extends Component {
       project: {},
       users: [],
       userSupplies: [],
-      trash: []
+      trash: [],
+      supplies: []
     
      
     }
@@ -59,6 +61,7 @@ componentDidMount(){
   }))
   this.userProjects()
   this.trashItems()
+  this.allSupplies()
 }
 
 trashItems = () => {
@@ -189,7 +192,44 @@ trashItems = () => {
     })
   }
 
+  // editSupplies = (checkedSupply) => {
+  //   console.log(checkedSupply)
+  //   let checkedProjectSupplies = []
+  //   checkedSupply.supplies.map(supply => 
+  //     checkedProjectSupplies.push(supply.has_item))
 
+  //   fetch(projectsUrl, {
+  //     method: "POST", 
+  //     headers: {
+  //       Authorization:  `Bearer ${localStorage.token}`,
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json'
+  //     }
+  //   })
+  //    .then(resp => resp.json())
+  // }
+
+  allSupplies = () => {
+    fetch(suppliesUrl, {
+        method: "GET",
+        headers: {
+            Authorization:  `Bearer ${localStorage.token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+
+    })
+    .then(res => res.json())
+    .then(supplyArray => this.setState({
+      supplies: supplyArray
+    }))
+  }
+
+
+
+
+
+  
 
   
 
@@ -217,6 +257,8 @@ trashItems = () => {
           :null}<br></br>
           
           <HeaderOne />
+
+
 
 
          
@@ -276,13 +318,15 @@ trashItems = () => {
           userSupplies={this.state.userSupplies}
           deleteMyProject={this.deleteMyProject}
           userSupplies={this.state.userSupplies}
+        
           />}
           />
 
           <Route exact path="/my-projects/:id" 
           render={(routerProps) => 
             <UserProjectDetails {...routerProps}
-       
+           
+
           />}
           />
 

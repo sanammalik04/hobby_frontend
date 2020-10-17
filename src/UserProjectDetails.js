@@ -8,32 +8,39 @@ let suppliesUrl = 'http://localhost:3000/supplies/'
 
 class UserProjectDetails extends React.Component {
 
-
-    updateSupplies = (supply) => {
-        console.log(supply)
-        let checked = !false
-        {supply.has_item === true ? checked = true : checked = false}
+    hasSupplies = (supply) => {
+    console.log(supply)
        
-        fetch(suppliesUrl + supply.id, {
-          method: 'POST',
-          headers: {
+    let checked = true
+    {supply[0].has_item == true ? checked = false : checked = true}
+    
+       fetch(suppliesUrl + supply[0].id, {
+           method: "POST",
+           headers: {
             Authorization:  `Bearer ${localStorage.token}`,
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          has_item: checked
-    
-        })
-        })
-        .then(res => res.json())
-        .then(console.log)
-      }
-    
-      
-      
+              'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+              has_item: checked
+          })
+       })
+       .then(res => res.json())
+       .then(console.log)
 
-      render(){
+       
+   }
+
+    
+    
+    
+    
+    
+    render(){
+
+        
+        
+      
         return(
             <div>
                 <Card className="User-Project" >
@@ -44,8 +51,14 @@ class UserProjectDetails extends React.Component {
                 <p>{this.props.location.userProject.description}</p>
                 {/* <Checkbox label='Make my supplies visible' /> */}
                 <h2>Supplies Needed:</h2>
+
                
-                <Checkbox onClick={() => this.updateSupplies(this.supply)} label={this.props.location.userProject.supplies.map(supplies => <h5>{supplies.name}</h5>)}/><br></br><br></br>
+
+                <div>
+                <Checkbox onClick={() => this.hasSupplies(this.props.location.userProject.supplies.map(supply => {return supply}))} checked={this.props.location.userProject.supplies.map(supply => {return supply.has_item})} allSupplies={this.props.allSupplies} label={this.props.location.userProject.supplies.map(supplies => <h5>{supplies.name}</h5>)}/><br></br><br></br>
+                </div>
+
+               
 
                 <Button><Link to="/my-projects" users={this.props.users}> My Projects</Link></Button> 
             </div>
@@ -56,8 +69,12 @@ class UserProjectDetails extends React.Component {
 
       }
     
-
+    }   
     
-}
+    
+    
+    
+
+
 
 export default UserProjectDetails

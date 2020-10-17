@@ -1,6 +1,6 @@
 .App {
   background-color: rgb(250, 233, 212);
-  color: rgb(209, 167, 50);
+  color: black;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -21,6 +21,14 @@
 
 .welcome{
   text-align: center;
+}
+
+.signup{
+  background-color:beige;
+}
+
+.vsc-initialized{
+  background-color:  rgb(250, 233, 212) ;
 }
 
 
@@ -47,6 +55,9 @@
   color: white;
 }
 
+.projectCard{
+   cursor: pointer;
+}
 .App-link {
   color: #61dafb;
 }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { Grid } from 'semantic-ui-react'
 
 class SignUp extends Component{
 
@@ -36,12 +37,14 @@ class SignUp extends Component{
    
     render(){
         return(
+            <Grid verticalAlign='middle'columns={5} centered>
         <div>
+            <div>
             <h2>Sign Up</h2>
             <form onSubmit={(e) => { 
                 this.signUp(e) 
                 this.handleSubmit() }}>
-
+            
             <label>Create Username</label>
             <input onChange={(e) => this.handleChange(e)} name="username" type="text" />
             <label>Your Address</label>
@@ -50,7 +53,9 @@ class SignUp extends Component{
             <input onChange={(e) => this.handleChange(e)} name="password" type="password" />
             <input type="submit"/>
             </form>
+            </div>   
         </div>
+            </Grid>
         )
     }
 }

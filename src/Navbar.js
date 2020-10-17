@@ -23,8 +23,8 @@ export const Navbar = (props) => {
            
         <div>
 
-          <Menu secondary>
-            <Menu.Item
+          <Menu pointing secondary>
+            <Menu.Item 
             as={NavLink} to="/projects"
             name= 'All Projects'
             active={activeItem === 'All Projects'}
