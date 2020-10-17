@@ -9,13 +9,13 @@ let suppliesUrl = 'http://localhost:3000/supplies/'
 class UserProjectDetails extends React.Component {
 
     hasSupplies = (supply) => {
-    console.log(supply)
+    console.log(supply[0].has_item )
        
     let checked = true
     {supply[0].has_item == true ? checked = false : checked = true}
     
        fetch(suppliesUrl + supply[0].id, {
-           method: "POST",
+           method: "PATCH",
            headers: {
             Authorization:  `Bearer ${localStorage.token}`,
             'Content-Type': 'application/json',
