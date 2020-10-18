@@ -3,18 +3,22 @@ import { Link } from 'react-router-dom';
 import { Checkbox, Button } from 'semantic-ui-react'
 import { Card } from 'semantic-ui-react'
 
-
+let projectsUrl = 'http://localhost:3000/projects/'
 let suppliesUrl = 'http://localhost:3000/supplies/'
 
 class UserProjectDetails extends React.Component {
 
+    // state = {
+    //     project: {}
+    // }
+
     hasSupplies = (supply) => {
-    console.log(supply[0].has_item )
+    console.log(supply.has_item )
        
     let checked = true
-    {supply[0].has_item == true ? checked = false : checked = true}
+    {supply.has_item == true ? checked = false : checked = true}
     
-       fetch(suppliesUrl + supply[0].id, {
+       fetch(suppliesUrl + supply.id, {
            method: "PATCH",
            headers: {
             Authorization:  `Bearer ${localStorage.token}`,
@@ -31,21 +35,22 @@ class UserProjectDetails extends React.Component {
        
    }
 
+
+
     
     
     
     
     
     render(){
-
-        
-        
       
         return(
             <div>
                 <Card className="User-Project" >
+
                 {this.props.location.userProject ?
                 <div>
+
                 <h1>{this.props.location.userProject.name}</h1>
                 <img src={this.props.location.userProject.ImageUrl} alt="" height="340px" width="265px"></img>
                 <p>{this.props.location.userProject.description}</p>
@@ -53,10 +58,16 @@ class UserProjectDetails extends React.Component {
                 <h2>Supplies Needed:</h2>
 
                
-
+                {this.props.location.userProject.supplies.map(supply =>
                 <div>
-                <Checkbox onClick={() => this.hasSupplies(this.props.location.userProject.supplies.map(supply => {return supply}))} checked={this.props.location.userProject.supplies.map(supply => {return supply.has_item})} allSupplies={this.props.allSupplies} label={this.props.location.userProject.supplies.map(supplies => <h5>{supplies.name}</h5>)}/><br></br><br></br>
+                <Checkbox onClick={() => this.hasSupplies(supply)} 
+                checked={supply.has_item}
+                label={supply.name}
+                /><br></br><br></br>
                 </div>
+
+                )}
+                
 
                
 

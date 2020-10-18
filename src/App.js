@@ -58,10 +58,12 @@ componentDidMount(){
   .then(res => res.json())
   .then(projectArray => this.setState({
     projects: projectArray
+
   }))
   this.userProjects()
   this.trashItems()
   this.allSupplies()
+  
 }
 
 trashItems = () => {
@@ -88,7 +90,7 @@ trashItems = () => {
     let clickedProjectSupplies = []
     clickedProject.supplies.map(supply => 
       clickedProjectSupplies.push(supply.name))
-    fetch(projectsUrl, {
+    fetch(projectsUrl + localStorage.currentUser,  {
       method: "POST", 
       headers: {
         Authorization:  `Bearer ${localStorage.token}`,
@@ -136,7 +138,7 @@ trashItems = () => {
     let createdProjectSupplies =  e.target.supplies.value.split(",")
     console.log(createdProjectSupplies)
     e.preventDefault()
-    fetch(projectsUrl, {
+    fetch(projectsUrl + localStorage.currentUser, {
       method: "POST",
       headers: {
           Authorization:  `Bearer ${localStorage.token}`,
@@ -159,6 +161,23 @@ trashItems = () => {
       loggedUser_id: userId
     })
   }
+
+  currentProject = (projectId) => {
+    fetch(projectsUrl + projectId, {
+      method: "GET",
+      headers: {
+          Authorization:  `Bearer ${localStorage.token}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+      }
+
+  })
+  .then(res => res.json())
+  .then(project => this.setState({
+    project: project
+  }))
+  }
+
 
   userProjects = () => {
     fetch(usersUrl + localStorage.currentUser, {
@@ -224,6 +243,50 @@ trashItems = () => {
       supplies: supplyArray
     }))
   }
+
+
+
+  // updateSupplies = (updateSupply) => {
+  //   this.setState({
+  //     project: updateSupply
+  //   })
+  // }
+
+  // handleChange = (e) => {
+  //   console.log(e.target.name)
+  //   console.log(e.target.value)
+  //   let name = e.target.name
+  //   let value = e.targt.value
+
+  //   this.setState({
+  //     project: {...this.state.project, [name]: value}
+  //   })
+  // }
+
+  // hasSupplies = (supply) => {
+  //   console.log(supply.has_item )
+       
+  //   let checked = true
+  //   {supply.has_item == true ? checked = false : checked = true}
+    
+  //      fetch(suppliesUrl + supply.id, {
+  //          method: "PATCH",
+  //          headers: {
+  //           Authorization:  `Bearer ${localStorage.token}`,
+  //           'Content-Type': 'application/json',
+  //             'Accept': 'application/json'
+  //         },
+  //         body: JSON.stringify({
+  //             has_item: checked
+  //         })
+  //      })
+  //      .then(res => res.json())
+  //      .then(project => this.setState({
+  //           projects: this.state.projects.map(project => {return {...project}})
+  //      })
+  //      )
+       
+  //  }
 
 
 
@@ -318,13 +381,18 @@ trashItems = () => {
           userSupplies={this.state.userSupplies}
           deleteMyProject={this.deleteMyProject}
           userSupplies={this.state.userSupplies}
-        
+          project={this.state.project}
           />}
           />
 
           <Route exact path="/my-projects/:id" 
           render={(routerProps) => 
             <UserProjectDetails {...routerProps}
+            // currentProject={this.currentProject}
+            // updateSupplies={this.updateSupplies}
+            // hasSupplies={this.hasSupplies}
+            projects={this.state.projects}
+            // handleChange={this.handleChange}
            
 
           />}
