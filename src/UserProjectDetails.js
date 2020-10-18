@@ -8,16 +8,12 @@ let suppliesUrl = 'http://localhost:3000/supplies/'
 
 class UserProjectDetails extends React.Component {
 
-    // state = {
-    //     project: {}
-    // }
-
     hasSupplies = (supply) => {
     console.log(supply.has_item )
        
     let checked = true
     {supply.has_item == true ? checked = false : checked = true}
-    
+    console.log(supply.has_item )
        fetch(suppliesUrl + supply.id, {
            method: "PATCH",
            headers: {
@@ -30,10 +26,11 @@ class UserProjectDetails extends React.Component {
           })
        })
        .then(res => res.json())
-       .then(console.log)
+       .then(this.props.currentProject(this.props.location.userProject.id))
 
        
    }
+
 
 
 
@@ -48,17 +45,17 @@ class UserProjectDetails extends React.Component {
             <div>
                 <Card className="User-Project" >
 
-                {this.props.location.userProject ?
+                {this.props.project ?
                 <div>
 
-                <h1>{this.props.location.userProject.name}</h1>
-                <img src={this.props.location.userProject.ImageUrl} alt="" height="340px" width="265px"></img>
-                <p>{this.props.location.userProject.description}</p>
+                <h1>{this.props.project.name}</h1>
+                <img src={this.props.project.ImageUrl} alt="" height="340px" width="265px"></img>
+                <p>{this.props.project.description}</p>
                 {/* <Checkbox label='Make my supplies visible' /> */}
                 <h2>Supplies Needed:</h2>
 
                
-                {this.props.location.userProject.supplies.map(supply =>
+                {this.props.supplies.map(supply =>
                 <div>
                 <Checkbox onClick={() => this.hasSupplies(supply)} 
                 checked={supply.has_item}
@@ -67,11 +64,12 @@ class UserProjectDetails extends React.Component {
                 </div>
 
                 )}
-                
-
-               
 
                 <Button><Link to="/my-projects" users={this.props.users}> My Projects</Link></Button> 
+
+                {/* <div>
+                    <p onClick= {() => {this.props.updateProjects(this.props.updateProject)}, this.handleClick()}>Update Project</p>
+                </div> */}
             </div>
             : null}
             </Card>

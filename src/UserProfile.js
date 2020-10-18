@@ -25,6 +25,7 @@ const UserProfile = (props) => {
           adoptProject={() => props.adoptProject(props.clickedProject)}
           deleteMyProject={() => props.deleteMyProject(userProject)}
           project={props.project}
+          currentProject = {() => props.currentProject(userProject.id)}
           
           />)}
           </div>

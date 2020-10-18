@@ -15,6 +15,7 @@ import UserCard from './UserCard';
 import UserProjectDetails from './UserProjectDetails';
 import TrashNothing from './TrashNothing';
 import TrashDetails from './TrashDetails';
+import EditProject from './EditProject';
 
 
 
@@ -173,9 +174,11 @@ trashItems = () => {
 
   })
   .then(res => res.json())
-  .then(project => this.setState({
-    project: project
-  }))
+  .then(res => 
+    this.setState({
+      supplies: res.supplies,
+      project: res
+    }))
   }
 
 
@@ -246,22 +249,44 @@ trashItems = () => {
 
 
 
-  // updateSupplies = (updateSupply) => {
-  //   this.setState({
-  //     project: updateSupply
-  //   })
-  // }
+  updateProjects = (updateProject) => {
+    console.log(updateProject)
+    this.setState({
+      project: updateProject
+    })
+  }
 
-  // handleChange = (e) => {
-  //   console.log(e.target.name)
-  //   console.log(e.target.value)
-  //   let name = e.target.name
-  //   let value = e.targt.value
+  handleChange = (e) => {
+    console.log(e.target.name)
+    console.log(e.target.value)
+    let name = e.target.name
+    let value = e.target.value
 
-  //   this.setState({
-  //     project: {...this.state.project, [name]: value}
-  //   })
-  // }
+    this.setState({
+      project: {...this.state.project, [name]: value}
+    })
+    console.log(this.state.project)
+  }
+
+  patchProject = () => {
+    let projectName = this.state.project.name
+    let projectDescription = this.state.project.description
+    fetch(projectsUrl + this.state.project.id, {
+      method: "PATCH",
+      headers:{
+        Authorization:  `Bearer ${localStorage.token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    },
+    body: JSON.stringify({
+      name: projectName,
+      description: projectDescription
+    })
+    })
+    .then(res => res.json())
+    .then(singleProject => console.log(singleProject))
+
+  }
 
   // hasSupplies = (supply) => {
   //   console.log(supply.has_item )
@@ -380,8 +405,11 @@ trashItems = () => {
           users={this.state.users}
           userSupplies={this.state.userSupplies}
           deleteMyProject={this.deleteMyProject}
+          //updateProjects={this.updateProjects}
           userSupplies={this.state.userSupplies}
           project={this.state.project}
+          supplies={this.state.supplies}
+          currentProject={this.currentProject}
           />}
           />
 
@@ -391,7 +419,10 @@ trashItems = () => {
             // currentProject={this.currentProject}
             // updateSupplies={this.updateSupplies}
             // hasSupplies={this.hasSupplies}
-            projects={this.state.projects}
+            project={this.state.project}
+            supplies={this.state.supplies}
+            currentProject={this.currentProject}
+            //updateProjects={this.updateProjects}
             // handleChange={this.handleChange}
            
 
@@ -413,6 +444,15 @@ trashItems = () => {
        
           />}
           />
+
+          <Route pathe='/edit-my-project' render={(routerProps) => 
+          <EditProject {...routerProps} 
+          patchProject={this.patchProject} 
+          project={this.state.project}
+          handleChange={this.handleChange}
+          currentProject={this.currentProject}
+          supplies={this.state.supplies}
+          />}/>
 
           
 

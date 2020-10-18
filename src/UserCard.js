@@ -5,17 +5,23 @@ import { Card, Button, Grid } from 'semantic-ui-react'
 
 
 class UserCard extends React.Component {
-
-
    
 
     handleClick = () =>{
+        this.props.currentProject(this.props.userProject.id)
+        localStorage.currentProject = this.props.userProject.id
         this.props.history.push({
             pathname:`/my-projects/${this.props.userProject.id}`,
-            userProject: this.props.userProject})   
+            userProject: this.props.userProject}) 
+          
     }
 
-  
+    handleEditClick = () =>{
+        this.props.currentProject(this.props.userProject.id)
+        this.props.history.push({
+            pathname:`/edit-my-project`
+           })
+    }
    
 render(){
 
@@ -34,6 +40,7 @@ render(){
             </div><br></br>
             <div>
             <Button onClick={() => this.props.deleteMyProject(this.props.userProject.id)}>Delete My Project</Button>
+            <Button onClick={this.handleEditClick}>Edit My Project</Button>
             </div><br></br>
             </Card>
             </Grid.Column>
