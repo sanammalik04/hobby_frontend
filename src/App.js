@@ -483,7 +483,13 @@ changeSuppliesNew = (i, e)=> {
           />}
           />
 
-          <Route path="/find-supplies"
+          <Route exact path="/find-supplies/:post_id"
+          render={(routerProps) => 
+          <TrashDetails {...routerProps}
+
+          />}
+          />
+          <Route exact path="/find-supplies"
           render={(routerProps) => 
           <TrashNothing {...routerProps}
           trash={this.state.trash}
@@ -492,12 +498,7 @@ changeSuppliesNew = (i, e)=> {
           />}
           />
 
-          <Route exact path="/find-supplies/:post_id"
-          render={(routerProps) => 
-          <TrashDetails {...routerProps}
-
-          />}
-          />
+          
 
           <Route path='/edit-my-project' render={(routerProps) => 
           <EditProject {...routerProps} 

@@ -8,6 +8,7 @@ class TrashCard extends Component {
     handleClicker = () =>{
         this.props.history.push({
             pathname:`/find-supplies/${this.props.trash.post_id}`,
+            trash: this.props.trash
             })
     }
 
