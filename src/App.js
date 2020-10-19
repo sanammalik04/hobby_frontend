@@ -41,7 +41,8 @@ class App extends Component {
       users: [],
       userSupplies: [],
       trash: [],
-      supplies: []
+      supplies: [],
+      suppliesToDelete: []
     
      
     }
@@ -149,7 +150,7 @@ trashItems = () => {
         user_id: this.state.loggedUser_id,
         name: e.target[0].value,
         description: e.target[1].value,
-        ImageUrl: e.target[3].value,
+        ImageUrl: e.target[2].value,
         supplies: createdProjectSupplies,
         original: true
       })
@@ -183,9 +184,12 @@ trashItems = () => {
 
   removeClick = (i) => {
     let values = [...this.state.supplies]
+    let suppliesToDelete = null
+    {values[i].hasOwnProperty("id")? suppliesToDelete = values[i] : suppliesToDelete = null}
     values.splice(i,1)
     this.setState({ 
-      supplies: values 
+      supplies: values,
+      suppliesToDelete: [...this.state.suppliesToDelete, suppliesToDelete]
     })
  }
 
@@ -332,6 +336,18 @@ changeSuppliesNew = (i, e)=> {
     })
     })
     .then(res => res.json())
+    .then(this.state.suppliesToDelete.map(supply => 
+      {supply == null? console.log("hello"): 
+      fetch(suppliesUrl + supply.id, {
+        method: "DELETE",
+        headers:{
+          Authorization:  `Bearer ${localStorage.token}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+      }
+    }
+     )}
+     ))
     .then(singleProject => console.log(singleProject))
 
   }
@@ -510,6 +526,7 @@ changeSuppliesNew = (i, e)=> {
           addClick={this.addClick}
           removeClick={this.removeClick}
           changeSupplies={this.changeSupplies}
+          suppliesToDelete={this.state.suppliesToDelete}
           />}/>
 
           
