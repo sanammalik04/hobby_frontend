@@ -43,7 +43,7 @@ export const Navbar = (props) => {
               as={NavLink} to="/new"
               name= 'Add Your Project'
               active={activeItem === 'Add Your Project'}
-              onClick={props.handleItemClick}
+              onClick={props.handleItemClick, props.newSupplies}
               projects={props.projects}
               ></Menu.Item>
 

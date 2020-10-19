@@ -48,6 +48,9 @@ class UserProjectDetails extends React.Component {
                 {this.props.project ?
                 <div>
 
+                {/* <h1>{JSON.parse(localStorage.currentProject).name}</h1>
+                <img src={JSON.parse(localStorage.currentProject).ImageUrl} alt="" height="340px" width="265px"></img>
+                <p>{JSON.parse(localStorage.currentProject).description}</p> */}
                 <h1>{this.props.project.name}</h1>
                 <img src={this.props.project.ImageUrl} alt="" height="340px" width="265px"></img>
                 <p>{this.props.project.description}</p>

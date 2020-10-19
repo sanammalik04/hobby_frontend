@@ -136,22 +136,22 @@ trashItems = () => {
 
   createProject = (e) => {
     // debugger
-    let createdProjectSupplies =  e.target.supplies.value.split(",")
+    let createdProjectSupplies =  this.state.supplies
     console.log(createdProjectSupplies)
     e.preventDefault()
-    fetch(projectsUrl + localStorage.currentUser, {
+    fetch(projectsUrl, {
       method: "POST",
       headers: {
           Authorization:  `Bearer ${localStorage.token}`,
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-      user_id: this.state.loggedUser_id,
-      name: e.target[0].value,
-      description: e.target[1].value,
-      ImageUrl: e.target[3].value,
-      supplies: createdProjectSupplies,
-      original: true
+        user_id: this.state.loggedUser_id,
+        name: e.target[0].value,
+        description: e.target[1].value,
+        ImageUrl: e.target[3].value,
+        supplies: createdProjectSupplies,
+        original: true
       })
     })
     .then(res => {return (res.json())})
@@ -163,6 +163,47 @@ trashItems = () => {
     })
   }
 
+  newSupplies = () => {
+    this.setState({
+      supplies: []
+    })
+  }
+
+  addClick = () => {
+    this.setState({ 
+      supplies: [...this.state.supplies, {name:'', has_item:false}]
+    })
+  }
+
+  addClickNew = () => {
+    this.setState({ 
+      supplies: [...this.state.supplies, '']
+    })
+  }
+
+  removeClick = (i) => {
+    let values = [...this.state.supplies]
+    values.splice(i,1)
+    this.setState({ 
+      supplies: values 
+    })
+ }
+
+ changeSupplies = (i, e)=> {
+  let values = [...this.state.supplies]
+  values[i].name = e.target.value
+  this.setState({ 
+    supplies: values 
+  })
+}
+
+changeSuppliesNew = (i, e)=> {
+  let values = [...this.state.supplies]
+  values[i] = e.target.value
+  this.setState({ 
+    supplies: values 
+  })
+}
   currentProject = (projectId) => {
     fetch(projectsUrl + projectId, {
       method: "GET",
@@ -243,7 +284,7 @@ trashItems = () => {
     })
     .then(res => res.json())
     .then(supplyArray => this.setState({
-      supplies: supplyArray
+      userSupplies: supplyArray
     }))
   }
 
@@ -271,6 +312,11 @@ trashItems = () => {
   patchProject = () => {
     let projectName = this.state.project.name
     let projectDescription = this.state.project.description
+    let imageUrl = this.state.project.ImageUrl
+    let projectSupplies = this.state.supplies
+    let JSONSupplies = JSON.stringify({projectSupplies})
+
+
     fetch(projectsUrl + this.state.project.id, {
       method: "PATCH",
       headers:{
@@ -280,7 +326,9 @@ trashItems = () => {
     },
     body: JSON.stringify({
       name: projectName,
-      description: projectDescription
+      description: projectDescription, 
+      ImageUrl: imageUrl,
+      supplies: JSONSupplies
     })
     })
     .then(res => res.json())
@@ -339,7 +387,7 @@ trashItems = () => {
     <div className= "App">
            {this.state.loggedUser_id ?
            <div> 
-           <Navbar users={this.state.users} projects={this.state.projects} trash={this.state.trash} />
+           <Navbar users={this.state.users} projects={this.state.projects} trash={this.state.trash} newSupplies={this.newSupplies} />
            </div>
 
           :null}<br></br>
@@ -357,7 +405,9 @@ trashItems = () => {
 
           <Route path="/login" render={(routerProps) => 
           <LogIn {...routerProps} 
-          currentUser={this.currentUser}/>}
+          currentUser={this.currentUser}
+          userProjects={this.userProjects}
+          />}
            
           />
 
@@ -385,6 +435,10 @@ trashItems = () => {
           projects={this.state.projects}
           useProjects={this.state.userProjects}
           userSupplies={this.state.userSupplies}
+          supplies={this.state.supplies}
+          addClickNew={this.addClickNew}
+          removeClick={this.removeClick}
+          changeSuppliesNew={this.changeSuppliesNew}
           />}
           />
 
@@ -438,20 +492,23 @@ trashItems = () => {
           />}
           />
 
-          <Route exact path="/my-supplies/post_id"
+          <Route exact path="/find-supplies/:post_id"
           render={(routerProps) => 
           <TrashDetails {...routerProps}
-       
+
           />}
           />
 
-          <Route pathe='/edit-my-project' render={(routerProps) => 
+          <Route path='/edit-my-project' render={(routerProps) => 
           <EditProject {...routerProps} 
           patchProject={this.patchProject} 
           project={this.state.project}
           handleChange={this.handleChange}
           currentProject={this.currentProject}
           supplies={this.state.supplies}
+          addClick={this.addClick}
+          removeClick={this.removeClick}
+          changeSupplies={this.changeSupplies}
           />}/>
 
           

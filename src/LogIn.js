@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import { Button, Form } from 'semantic-ui-react'
+
 
 class LogIn extends Component{
 
@@ -35,6 +37,7 @@ class LogIn extends Component{
             localStorage.token = userInfo.token
             localStorage.currentUser = userInfo.user_id
             this.props.currentUser(userInfo.user_id)
+            this.props.userProjects()
            
         
         })
@@ -43,19 +46,33 @@ class LogIn extends Component{
     render(){
         return(
             <div>
+
+            
              <h2>Login</h2>
-            <form onSubmit={(e) => {
+        
+           
+            <Form onSubmit={(e) => {
                 this.login(e)
                 this.handleSubmit()}}>
 
-            <label>UserName</label>
-            <input onChange={(e) => this.handleChange(e)} name="username" type="text" />
-
+            <Form.Field>
+            {<label>Username</label>}
+            <input placeholder= "Username" onChange={(e) => this.handleChange(e)} name="username" type="text" /><br></br>
+            </Form.Field>
+            
+            <Form.Field>
             <label>Password</label>
-            <input onChange={(e) => this.handleChange(e)} name="password" type="password" />
+            <input placeholder= "password" onChange={(e) => this.handleChange(e)} name="password" type="password" /><br></br>
+            </Form.Field>
 
+            <Form.Field>
             <input type="submit"/>
-            </form>
+            </Form.Field>
+           
+          
+            </Form>
+
+    
         </div>
         )
     }

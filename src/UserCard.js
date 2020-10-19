@@ -9,7 +9,7 @@ class UserCard extends React.Component {
 
     handleClick = () =>{
         this.props.currentProject(this.props.userProject.id)
-        localStorage.currentProject = this.props.userProject.id
+        localStorage.setItem('currentProject', JSON.stringify(this.props.userProject))
         this.props.history.push({
             pathname:`/my-projects/${this.props.userProject.id}`,
             userProject: this.props.userProject}) 

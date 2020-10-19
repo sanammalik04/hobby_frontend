@@ -1,9 +1,15 @@
-import React from 'react'
+// import React from 'react'
+import React, { useState } from 'react'
 import {Link} from 'react-router-dom'
 import { Button, Popup } from 'semantic-ui-react'
 
 
+
+
+
 const HomePage = (props) => {
+
+   
     return (
        
         <div className= 'welcome'>

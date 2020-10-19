@@ -12,6 +12,14 @@ const EditProject = (props) => {
         props.history.push('/my-projects')
     }
 
+    let createUI = () => {
+        return props.supplies.map((supply, i) => 
+            <div key={i}>
+               <input type="text" value={supply.name} onChange={props.changeSupplies.bind(this, i)} />
+               <input type='button' value='remove' onClick={props.removeClick.bind(this, i)}/>
+            </div>          
+        )
+     }
 
     return(
         <div>
@@ -34,7 +42,9 @@ const EditProject = (props) => {
                 </div>
 
                 )}  */}
-                 <input type='submit' value='Update Project' /><br></br><br></br>
+                {createUI()} 
+                <input type='button' value='Add Supply' onClick={props.addClick.bind(this)}/>
+                <input type='submit' value='Update Project' /><br></br><br></br>
                 </form>
 
         </div>
