@@ -13,7 +13,7 @@ const HomePage = (props) => {
     return (
        
 
-            <div className= 'welcome'>
+            <div className='welcome'>
             <h1>Welcome!</h1>
 
             <Popup

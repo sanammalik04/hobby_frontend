@@ -1,7 +1,8 @@
 import React from 'react'
 import ProjectDetails from './ProjectDetails'
+import './App.css';
 import { Link } from 'react-router-dom';
-import { Card, Icon, Grid } from 'semantic-ui-react'
+import { Card, Image, Button } from 'semantic-ui-react'
 
 
 class ProjectCard extends React.Component { 
@@ -20,31 +21,20 @@ render(){
 
         
 
-        <div>
+        <div className="gridProjectCard">
             
+            <div className="grid-item2">
+            <div>
+            {/* <Card.Header>{name}</Card.Header> */}
+            <Image onClick={this.handleClick} src={ImageUrl} alt='' height="340px" width="265px"></Image>
+            {/* <div className = 'ui buttons'>
+                <Button onClick={this.handleClick} basic color = 'black'>
+                    Project Details
+                </Button>
+            </div> */}
             
-            <Grid verticalAlign='middle' columns={5} centered >
-            <Grid.Row>
-                <Grid.Column>
-            <Card>
-            <h3>{name}</h3>
-            <div className="projectCard">
-            <img onClick={this.handleClick} src={ImageUrl} alt='' height="340px" width="265px"></img>
-        
             </div>
-            </Card>
-            </Grid.Column>
-            </Grid.Row>
-            </Grid>
-
-           
-
-            
-
-            
-    
-
-
+            </div>
         </div>
     )
 }

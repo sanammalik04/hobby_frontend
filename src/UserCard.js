@@ -1,7 +1,8 @@
 import React from 'react';
 import UserProjectDetails from './UserProjectDetails'
 import { Link } from 'react-router-dom';
-import { Card, Button, Grid } from 'semantic-ui-react'
+import './App.css';
+import { Card, Button, Image, Header } from 'semantic-ui-react'
 
 
 class UserCard extends React.Component {
@@ -29,28 +30,25 @@ render(){
 
     return(
 
-        <div>
-            <Grid verticalAlign='middle'columns={5} centered>
-            <Grid.Row divided={true}>
-                <Grid.Column>
-            <Card>
-            <h3>{this.props.userProject.name}</h3>
+        <div className="gridUserCard"> 
+
+           <div className='grid-item3'>
+            {/* <Card.Header><h1>{this.props.userProject.name}</h1></Card.Header> */}
             <div>
-            <img onClick={this.handleClick} src={this.props.userProject.ImageUrl} alt='' height="340px" width="265px"></img>
+            <Image onClick={this.handleClick} src={this.props.userProject.ImageUrl} alt='' height="340px" width="265px"></Image>
             </div><br></br>
-            <div>
-            <Button onClick={() => this.props.deleteMyProject(this.props.userProject.id)}>Delete My Project</Button>
-            <Button onClick={this.handleEditClick}>Edit My Project</Button>
-            </div><br></br>
-            </Card>
-            </Grid.Column>
-            </Grid.Row>
-            </Grid>
+           
+            <Button basic color='red' onClick={() => this.props.deleteMyProject(this.props.userProject.id)}>Delete My Project</Button><br></br><br></br>
+            <Button basic color='red' onClick={this.handleEditClick}>Edit My Project</Button><br></br><br></br>
+        
+        
+           
 
 
 
 
 
+        </div>
         </div>
     )
 }

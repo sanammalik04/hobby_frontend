@@ -2,21 +2,8 @@
   background-color: rgb(250, 233, 212);
   color: black;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-
-.User-Project{
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  text-align: center;
-  background-color:beige;
-  color: brown;
-  padding: 1rem;
-  width: 18rem;
-  height: 28rem;
-  display: inline-grid;
-  margin: 4rem 4rem; 
-  /* cursor: pointer; */
-
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .search{
@@ -64,9 +51,9 @@
   color: white;
 }
 
-.projectCard{
+/* .projectCard{
    cursor: pointer;
-}
+} */
 .App-link {
   color: #61dafb;
 }
@@ -80,8 +67,63 @@
   }
 }
 
-.card{
+/* .card{
   width: 50%;
   margin: 0 auto;
   text-align: center;
+} */
+
+.grid-item {
+  float: left;
+  width: 350px;
+  background:beige;
+  height: 120px;
+  border: 1px solid #333;
+  border-color: hsla(0, 0%, 0%, 0.5);
+  padding-left: 40px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  padding-right: 20px;
 }
+
+.grid{
+  padding-left: 50px;
+}
+
+.gridProjectCard{
+  padding-left: 50px;
+}
+
+.grid-item2{
+  float: left;
+  width: 250px;
+  height: 300px;
+  border: 0px solid hsla(0, 0%, 0%, 0.5);
+  cursor: pointer;
+}
+
+.gridUserCard{
+  padding-left: 50px;
+}
+
+.grid-item3{
+  float: left;
+  width: 300px;
+  height: px;
+  border: 0px solid hsla(0, 0%, 0%, 0.5);
+  cursor: pointer;
+}
+
+.userProject{
+  padding-left: 50px ;
+  
+}
+
+.checkbox{
+  padding-left: 20px;
+}
+
+.projectTitle{
+  padding-left: 300px;
+}
+

@@ -12,11 +12,11 @@ import {
 const TrashDetails = (props) => {
     // const libraries = ["places"]
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: 'AIzaSyCKkJ4qAVOok3ymfjXYRII1sL2gabVmRN0'
+        googleMapsApiKey: 'AIzaSyBO5elK2y6CEtWBfZ49b4ZFQVl-UUSyfJg'
     })
     const mapContainerStyle = {
-        width: '100vw',
-        height: '100vh'
+        width: '50vw',
+        height: '50vh'
     }
     const mapRef = React.useRef();
     const onMapLoad = React.useCallback(map=> {

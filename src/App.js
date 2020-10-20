@@ -17,6 +17,7 @@ import TrashNothing from './TrashNothing';
 import TrashDetails from './TrashDetails';
 import EditProject from './EditProject';
 import TrashCard from './TrashCard';
+import { Container } from 'semantic-ui-react'
 
 
 
@@ -440,6 +441,7 @@ changeSuppliesNew = (i, e)=> {
       <BrowserRouter>
 
     <div className= "App">
+   
            {this.state.loggedUser_id ?
 
            <div> 
