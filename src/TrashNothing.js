@@ -5,10 +5,10 @@ const TrashNothing = (props) => {
 console.log(props)
     return(
         <div>
-            {props.trash?
+            {props.showTrash?
             <div>
 
-            {props.trash.map(trash => 
+            {props.showTrash.map(trash => 
             <TrashCard 
             key={trash.id}
             trash={trash}

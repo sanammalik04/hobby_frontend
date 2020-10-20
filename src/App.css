@@ -19,6 +19,10 @@
 
 }
 
+.search{
+  align-items: top;
+}
+
 .welcome{
   text-align: center;
 }
@@ -31,6 +35,11 @@
   background-color:  rgb(250, 233, 212) ;
 }
 
+.Login{
+  height:1000px;
+  text-align: center;
+  cursor: pointer;
+}
 
 
 .App-logo {

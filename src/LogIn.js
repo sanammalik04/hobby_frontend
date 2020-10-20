@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Divider, Grid, Segment } from 'semantic-ui-react'
 
 
 class LogIn extends Component{
@@ -45,13 +45,11 @@ class LogIn extends Component{
     
     render(){
         return(
-            <div>
+            <div className="Login">
 
             
              <h2>Login</h2>
-        
-           
-            <Form onSubmit={(e) => {
+             <Form onSubmit={(e) => {
                 this.login(e)
                 this.handleSubmit()}}>
 
@@ -59,7 +57,7 @@ class LogIn extends Component{
             {<label>Username</label>}
             <input placeholder= "Username" onChange={(e) => this.handleChange(e)} name="username" type="text" /><br></br>
             </Form.Field>
-            
+
             <Form.Field>
             <label>Password</label>
             <input placeholder= "password" onChange={(e) => this.handleChange(e)} name="password" type="password" /><br></br>
@@ -68,10 +66,11 @@ class LogIn extends Component{
             <Form.Field>
             <input type="submit"/>
             </Form.Field>
-           
-          
-            </Form>
 
+
+            </Form> 
+
+           
     
         </div>
         )
@@ -79,5 +78,4 @@ class LogIn extends Component{
 }
 
 export default LogIn
-
 

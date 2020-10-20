@@ -1,7 +1,7 @@
 // import React from 'react'
 import React, { useState } from 'react'
 import {Link} from 'react-router-dom'
-import { Button, Popup } from 'semantic-ui-react'
+import { Button, Popup, Divider, Grid, Segment} from 'semantic-ui-react'
 
 
 
@@ -12,8 +12,10 @@ const HomePage = (props) => {
    
     return (
        
-        <div className= 'welcome'>
+
+            <div className= 'welcome'>
             <h1>Welcome!</h1>
+
             <Popup
                 trigger={<Button
                         type="button"
@@ -28,7 +30,7 @@ const HomePage = (props) => {
                 />
 
                 <Popup
-            
+
                 trigger={<Button
                         type="button"
                         onClick={(e) => {
@@ -41,8 +43,28 @@ const HomePage = (props) => {
                 hideOnScroll
                 />
 
-        </div>
+            </div> 
     )
 }
 
 export default HomePage 
+
+
+// <Segment placeHolder>
+// <Grid columns={2} relaxed='very' stackable>
+
+// <Grid.Column verticalAlign='middle'>
+
+//      <Button content='Login' icon='login' size='big' onClick={(e) => {e.preventDefault(); window.location.href='/login'; }}/>
+
+// </Grid.Column>
+
+// <Grid.Column verticalAlign='middle'>
+
+//     <Button content="Sign Up" size='big' onClick={(e) => {e.preventDefault(); window.location.href='/signup'; }}/>
+
+// </Grid.Column>
+
+// </Grid>
+
+// </Segment>

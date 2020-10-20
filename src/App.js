@@ -16,6 +16,8 @@ import UserProjectDetails from './UserProjectDetails';
 import TrashNothing from './TrashNothing';
 import TrashDetails from './TrashDetails';
 import EditProject from './EditProject';
+import TrashCard from './TrashCard';
+
 
 
 
@@ -42,13 +44,15 @@ class App extends Component {
       userSupplies: [],
       trash: [],
       supplies: [],
-      suppliesToDelete: []
+      suppliesToDelete: [],
+      showTrash: []
     
      
     }
   }
 
 componentDidMount(){
+  // localStorage.project = this.state.projects
   fetch(projectsUrl, {
     method: "GET",
     headers: {
@@ -80,7 +84,8 @@ trashItems = () => {
   })
   .then(res => res.json())
   .then(trashData => this.setState({
-    trash: trashData.posts
+    trash: trashData.posts,
+    showTrash: trashData.posts
   }))
   
 }
@@ -89,10 +94,12 @@ trashItems = () => {
 
 
   adoptProject = (clickedProject) => {
+    console.log(clickedProject)
     let clickedProjectSupplies = []
     clickedProject.supplies.map(supply => 
-      clickedProjectSupplies.push(supply.name))
-    fetch(projectsUrl + localStorage.currentUser,  {
+    clickedProjectSupplies.push(supply.name))
+    console.log(clickedProjectSupplies)
+    fetch(projectsUrl, {
       method: "POST", 
       headers: {
         Authorization:  `Bearer ${localStorage.token}`,
@@ -104,6 +111,7 @@ trashItems = () => {
           name: clickedProject.name,
           description: clickedProject.description,
           ImageUrl: clickedProject.ImageUrl,
+          directions: clickedProject.directions,
           supplies: clickedProjectSupplies,
           original: false
 
@@ -151,11 +159,16 @@ trashItems = () => {
         name: e.target[0].value,
         description: e.target[1].value,
         ImageUrl: e.target[2].value,
+        directions: e.target[3].value,
         supplies: createdProjectSupplies,
         original: true
       })
     })
-    .then(res => {return (res.json())})
+    .then(res => res.json())
+    .then(newProject => this.setState({
+      projects: [...this.state.projects, newProject],
+      users: [...this.state.users, newProject]
+    }))
   }
 
   currentUser = (userId) => {
@@ -166,7 +179,8 @@ trashItems = () => {
 
   newSupplies = () => {
     this.setState({
-      supplies: []
+      supplies: [],
+      suppliesToDelete: []
     })
   }
 
@@ -255,7 +269,9 @@ changeSuppliesNew = (i, e)=> {
     })
     let myProject = this.state.projects.filter(projectObj => projectObj !== project)
     this.setState({
-      projects: myProject
+      projects: myProject,
+      users: myProject
+
     })
   }
 
@@ -292,6 +308,12 @@ changeSuppliesNew = (i, e)=> {
     }))
   }
 
+  // updateSupply = (updatedSupply) => {
+  //   this.setState({
+  //     supplies: updateSupply
+  //   })
+  // }
+
 
 
   updateProjects = (updateProject) => {
@@ -316,6 +338,7 @@ changeSuppliesNew = (i, e)=> {
   patchProject = () => {
     let projectName = this.state.project.name
     let projectDescription = this.state.project.description
+    let projectDirections = this.state.project.directions
     let imageUrl = this.state.project.ImageUrl
     let projectSupplies = this.state.supplies
     let JSONSupplies = JSON.stringify({projectSupplies})
@@ -332,6 +355,7 @@ changeSuppliesNew = (i, e)=> {
       name: projectName,
       description: projectDescription, 
       ImageUrl: imageUrl,
+      directions: projectDirections,
       supplies: JSONSupplies
     })
     })
@@ -377,6 +401,21 @@ changeSuppliesNew = (i, e)=> {
        
   //  }
 
+  handleSearch = (input) => {
+    this.setState({
+      showTrash: this.state.trash.filter(trash => trash.content.includes(input))
+    })
+  }
+
+  searchItem = (input) => {
+    let bool = false
+    {this.state.trash.filter(trash => trash.content.includes(input.toLowerCase())).length > 0? bool = true : bool = false}
+    console.log(bool)
+    return bool
+  }
+
+
+
 
 
 
@@ -402,18 +441,28 @@ changeSuppliesNew = (i, e)=> {
 
     <div className= "App">
            {this.state.loggedUser_id ?
+
            <div> 
-           <Navbar users={this.state.users} projects={this.state.projects} trash={this.state.trash} newSupplies={this.newSupplies} />
+
+           <Navbar 
+           users={this.state.users} 
+           projects={this.state.projects} 
+           trash={this.state.trash} 
+            newSupplies={this.newSupplies} 
+            handleSearch={this.handleSearch} 
+            userProjects={this.userProjects}
+           />
+
            </div>
 
-          :null}<br></br>
+          : null } <br></br>
           
           <HeaderOne />
 
+          {/* {this.state.loggedUser_id ?
+          <TrashCard  handleSearch={this.handleSearch} /> 
+          : null } */}
 
-
-
-         
 
        
       <Switch>
@@ -460,7 +509,8 @@ changeSuppliesNew = (i, e)=> {
 
           <Route exact path= '/projects/:id' render={(routerProps) => {
             let id = parseInt(routerProps.match.params.id)
-            let projectShowpage = this.state.projects.find(project => project.id === id)
+            let projectShowpage = this.state.users.find(project => project.id === id)
+            // localStorage.project = this.state.projects
             return <ProjectDetails {...routerProps} 
             projectShowpage={projectShowpage} 
             adoptProject={this.adoptProject}
@@ -475,7 +525,6 @@ changeSuppliesNew = (i, e)=> {
           users={this.state.users}
           userSupplies={this.state.userSupplies}
           deleteMyProject={this.deleteMyProject}
-          //updateProjects={this.updateProjects}
           userSupplies={this.state.userSupplies}
           project={this.state.project}
           supplies={this.state.supplies}
@@ -484,19 +533,16 @@ changeSuppliesNew = (i, e)=> {
           />
 
           <Route exact path="/my-projects/:id" 
-          render={(routerProps) => 
-            <UserProjectDetails {...routerProps}
-            // currentProject={this.currentProject}
-            // updateSupplies={this.updateSupplies}
-            // hasSupplies={this.hasSupplies}
+          render={(routerProps) => {
+            let id = parseInt(routerProps.match.params.id)
+            let userProjectShowpage = this.state.projects.find(project => project.id === id)
+            return <UserProjectDetails {...routerProps}
+            userProjectShowpage={userProjectShowpage}
             project={this.state.project}
             supplies={this.state.supplies}
             currentProject={this.currentProject}
-            //updateProjects={this.updateProjects}
-            // handleChange={this.handleChange}
-           
-
-          />}
+            searchItem={this.searchItem}
+          />}}
           />
 
           <Route exact path="/find-supplies/:post_id"
@@ -505,10 +551,13 @@ changeSuppliesNew = (i, e)=> {
 
           />}
           />
+
           <Route exact path="/find-supplies"
           render={(routerProps) => 
           <TrashNothing {...routerProps}
           trash={this.state.trash}
+          showTrash={this.state.showTrash}
+       
 
           
           />}

@@ -1,7 +1,7 @@
 import React from 'react'
 import UserProfile from './UserProfile'
 import { NavLink }  from 'react-router-dom'
-import { Button, Menu } from 'semantic-ui-react'
+import { Button, Menu, Input } from 'semantic-ui-react'
 
 let home = 'http://localhost:3001/home'
 
@@ -35,7 +35,7 @@ export const Navbar = (props) => {
               as={NavLink} to="/my-projects"
               name= 'My Projects'
               active={activeItem === 'My Projects'}
-              onClick={props.handleItemClick}
+              onClick={props.handleItemClick, props.userProjects}
               Users={props.users}
               ></Menu.Item>
     
@@ -56,13 +56,24 @@ export const Navbar = (props) => {
               ></Menu.Item>
 
 
-              <Menu.Menu position='right'>
+              {/* <Menu.Menu position='right'> */}
               <Menu.Item
               name= 'Logout'
               active={activeItem === 'Logout'}
               onClick={logout}
               ></Menu.Item>
-              </Menu.Menu>
+              {/* </Menu.Menu> */}
+
+              <Menu.Menu position = 'right'>
+                <Menu.Item>
+                  <Input 
+                  onChange={(e) => props.handleSearch(e.target.value)} 
+                  icon='search' 
+                  placeholder='Get Craftsy'
+                  />
+                  </Menu.Item>
+
+              </Menu.Menu> 
 
              
 

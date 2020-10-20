@@ -30,6 +30,7 @@ render(){
             <h3>{name}</h3>
             <div className="projectCard">
             <img onClick={this.handleClick} src={ImageUrl} alt='' height="340px" width="265px"></img>
+        
             </div>
             </Card>
             </Grid.Column>
