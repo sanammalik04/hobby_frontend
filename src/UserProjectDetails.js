@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { Checkbox, Button, Container, Image } from 'semantic-ui-react'
+import { Checkbox, Button, Image, Card } from 'semantic-ui-react'
 import './App.css';
 
 
@@ -70,21 +70,26 @@ handleEditClick = () =>{
     render(){
       
         return(
-            <div className='userProject'>
-                <Container>
+            <div className="grid">
+            <div className="grid-item4">
+             
+
                 <div>
 
                 {this.props.project ?
                 <div>
 
                 <div className='projectTitle'>
-
-                <h1>{JSON.parse(localStorage.currentProject).name}</h1>
+        
+                <Card.Header><h1>{JSON.parse(localStorage.currentProject).name}</h1></Card.Header><br></br>
+              
 
                 </div>
                
-                <Image src={JSON.parse(localStorage.currentProject).ImageUrl} alt="" height="340px" width="265px"></Image>
- 
+               <div className='userCardImage'>
+                <Image src={JSON.parse(localStorage.currentProject).ImageUrl} alt="" height="340px" width="265px" ></Image><br></br>
+                </div>
+                    <div className='userCardContent'>
                 <p>{JSON.parse(localStorage.currentProject).description}</p>
                 <p>{JSON.parse(localStorage.currentProject).directions}</p>
                 {/* <h1>{this.props.project.name}</h1>
@@ -102,15 +107,17 @@ handleEditClick = () =>{
                 label={supply.name}
                 />
                 {this.props.searchItem(supply.name)?
-                 <Button basic color='red'><Link to="/find-supplies"> Supply Exists Near You</Link></Button> :
+                 <Button basic color='red' as={Link} to="/find-supplies"> Supply Exists Near You</Button> :
                 null}
                 <br></br><br></br>
                 </div>
 
-                )}
 
-                <Button basic color= 'red'><Link to="/my-projects" users={this.props.users}> My Projects</Link></Button> 
-
+)}
+                </div>
+                    <div className='userCardButton'>
+                <Button basic color= 'red' as={Link} to='/my-projects'users={this.props.users}> My Projects</Button> 
+                    </div>
                 {/* <div>
                     <p onClick= {() => {this.props.updateProjects(this.props.updateProject)}, this.handleClick()}>Update Project</p>
                 </div> */}
@@ -118,7 +125,9 @@ handleEditClick = () =>{
             </div>
             : null}
             </div>
-            </Container>
+    
+    
+            </div>
             </div>
         )
 

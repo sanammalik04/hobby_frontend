@@ -268,12 +268,13 @@ changeSuppliesNew = (i, e)=> {
         Authorization:  `Bearer ${localStorage.token}`,
       }
     })
-    let myProject = this.state.projects.filter(projectObj => projectObj !== project)
+    let allProjects = this.state.projects.filter(projectObj => projectObj.id !== project.id)
+    let allMyprojects = this.state.users.filter(projectObj => projectObj !== project)
     this.setState({
-      projects: myProject,
-      users: myProject
-
+      projects: allProjects,
+      users: allMyprojects
     })
+
   }
 
   // editSupplies = (checkedSupply) => {
