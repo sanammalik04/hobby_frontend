@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Grid } from 'semantic-ui-react'
+import { Grid, Form, Button, Container } from 'semantic-ui-react'
 
 class SignUp extends Component{
 
@@ -37,25 +37,37 @@ class SignUp extends Component{
    
     render(){
         return(
-            <Grid verticalAlign='middle'columns={5} centered>
-        <div>
+         <Container className='loginPage'>
+        <div className="Login">
             <div>
-            <h2>Sign Up</h2>
-            <form onSubmit={(e) => { 
+            <h2 className='loginTitle'>Sign Up</h2>
+            <Form onSubmit={(e) => { 
                 this.signUp(e) 
                 this.handleSubmit() }}>
-            
+
+            <Form.Field className='password'>
             <label>Create Username</label>
-            <input onChange={(e) => this.handleChange(e)} name="username" type="text" />
+            <Form.Input onChange={(e) => this.handleChange(e)} name="username" type="text" />
+            </Form.Field>
+
+            <Form.Field className='password'>
             <label>Your Address</label>
-            <input onChange={(e) => this.handleChange(e)} name="address" type="text" />
+            <Form.Input onChange={(e) => this.handleChange(e)} name="address" type="text" />
+            </Form.Field>
+
+            <Form.Field className='password'>
             <label>Create Password</label>
-            <input onChange={(e) => this.handleChange(e)} name="password" type="password" />
-            <input type="submit"/>
-            </form>
+            <Form.Input onChange={(e) => this.handleChange(e)} name="password" type="password" />
+            </Form.Field>
+
+            <Form.Field className='signInBtn'>
+            <Form.Input><Button color= 'red' type="submit">Sign Up</Button></Form.Input>
+            </Form.Field>
+            
+            </Form>
             </div>   
         </div>
-            </Grid>
+        </Container>
         )
     }
 }

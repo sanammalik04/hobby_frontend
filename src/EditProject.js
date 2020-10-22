@@ -1,5 +1,5 @@
 import React from 'react'
-import { Checkbox, Button, Form } from 'semantic-ui-react'
+import { Checkbox, Button, Form, Input, Container, TextArea } from 'semantic-ui-react'
 
 let projectsUrl = 'http://localhost:3000/projects/'
 let suppliesUrl = 'http://localhost:3000/supplies/'
@@ -15,39 +15,42 @@ const EditProject = (props) => {
     let createUI = () => {
         return props.supplies.map((supply, i) => 
             <div key={i}>
-               <input type="text" value={supply.name} onChange={props.changeSupplies.bind(this, i)} />
-               <input type='button' value='remove' onClick={props.removeClick.bind(this, i)}/>
+               <Form.Field><Input type="text" value={supply.name} onChange={props.changeSupplies.bind(this, i)}></Input></Form.Field><br></br>
+               <Form.Field><Button type='button' value='remove'  color='red'  size='mini' onClick={props.removeClick.bind(this, i)}>X</Button></Form.Field><br></br>
             </div>          
         )
      }
 
     return(
-        <div>
+        <div className='editDiv'>
            
 
-            <div>
+            <div className='gridEditForm'>
+                <Container className='editForm'>
 
             <Form onSubmit={() => {
                 props.patchProject()
                 handleSubmit()
             
             }}>
-                <input disabled="disabled" type='text' placeholder= 'Project Name' name="name" value={props.project.name} onChange={(e) => props.handleChange(e)}/>
-                <textarea type='text' placeholder='Description'name='description' value={props.project.description} onChange={(e) => props.handleChange(e)}/>
-                <input type='text' placeholder= 'Image URL' name="Image URL" value={props.project.ImageUrl} onChange={(e) => props.handleChange(e)}/>
-                <textarea type='text' placeholder='Directions'name='directions' value={props.project.directions} onChange={(e) => props.handleChange(e)}/>
-                
-                {/* {props.supplies.map(supply =>
-                <div>
-                
-                </div>
-
-                )}  */}
+                 <Form.Group widths='equal'>
+                     <Form.Field>
+                <Form.Input type='text' placeholder= 'Project Name' name="name" value={props.project.name} onChange={(e) => props.handleChange(e)}/><br></br>
+                <TextArea type='text' placeholder='Description'name='description' value={props.project.description} onChange={(e) => props.handleChange(e)}/><br></br><br></br>
+                <Form.Input type='text' placeholder= 'Image URL' name="Image URL" value={props.project.ImageUrl} onChange={(e) => props.handleChange(e)}/><br></br>
+                <TextArea type='text' placeholder='Directions'name='directions' value={props.project.directions} onChange={(e) => props.handleChange(e)}/><br></br><br></br>
                 {createUI()} 
-                <input type='button' value='Add Supply' onClick={props.addClick.bind(this)}/>
-                <input type='submit' value='Update Project' /><br></br><br></br>
+                </Form.Field>
+                </Form.Group>
+                <div className='editBtn'>
+                    <div className='editSupplyBtn'>
+                <Form.Input><Button color= 'red' size='mini' type='button' value='Add Supply' onClick={props.addClick.bind(this)}>Add Supply</Button></Form.Input> 
+                    </div>
+                <Form.Input><Button color= 'red' size='large' type='submit' value='Update Project'>Update My Project</Button></Form.Input><br></br><br></br>
+                </div>
                 </Form>
 
+        </Container>
         </div>
       
         </div>

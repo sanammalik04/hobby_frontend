@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Button, Form, Divider, Grid, Segment } from 'semantic-ui-react'
+import { Button, Form, Divider, Grid, Segment, Container } from 'semantic-ui-react'
 
 
 class LogIn extends Component{
@@ -45,26 +45,27 @@ class LogIn extends Component{
     
     render(){
         return(
-            <div className="Login">
+            <Container className='loginPage'>
+            <div className="Login"><br></br>
 
             
-             <h2>Login</h2>
+             <h2 className='loginTitle'>Login</h2><br></br><br></br>
              <Form onSubmit={(e) => {
                 this.login(e)
                 this.handleSubmit()}}>
 
-            <Form.Field>
+            <Form.Field className='username'>
             {<label>Username</label>}
-            <input placeholder= "Username" onChange={(e) => this.handleChange(e)} name="username" type="text" /><br></br>
+            <Form.Input placeholder= "Username" onChange={(e) => this.handleChange(e)} name="username" type="text" /><br></br>
             </Form.Field>
 
-            <Form.Field>
+            <Form.Field className='password'>
             <label>Password</label>
-            <input placeholder= "password" onChange={(e) => this.handleChange(e)} name="password" type="password" /><br></br>
+            <Form.Input placeholder= "password" onChange={(e) => this.handleChange(e)} name="password" type="password" /><br></br>
             </Form.Field>
 
-            <Form.Field>
-            <input type="submit"/>
+            <Form.Field className='signInBtn'>
+            <Form.Input><Button color= 'red' size= 'large' type="submit">Sign In</Button></Form.Input>
             </Form.Field>
 
 
@@ -73,6 +74,7 @@ class LogIn extends Component{
            
     
         </div>
+        </Container>
         )
     }
 }

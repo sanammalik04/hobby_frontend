@@ -17,6 +17,7 @@ import TrashNothing from './TrashNothing';
 import TrashDetails from './TrashDetails';
 import EditProject from './EditProject';
 import TrashCard from './TrashCard';
+import Footer from './Footer';
 import { Container } from 'semantic-ui-react'
 
 
@@ -461,6 +462,7 @@ changeSuppliesNew = (i, e)=> {
           : null } <br></br>
           
           <HeaderOne />
+        
 
           {/* {this.state.loggedUser_id ?
           <TrashCard  handleSearch={this.handleSearch} /> 
@@ -545,6 +547,7 @@ changeSuppliesNew = (i, e)=> {
             supplies={this.state.supplies}
             currentProject={this.currentProject}
             searchItem={this.searchItem}
+            handleSearch={this.handleSearch}
           />}}
           />
 

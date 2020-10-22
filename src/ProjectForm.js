@@ -15,7 +15,7 @@ const ProjectForm = (props) => {
         return props.supplies.map((supply, i) => 
             <div key={i}>
                <Form.Field><Input type="text" value={supply.name} onChange={props.changeSuppliesNew.bind(this, i)}></Input></Form.Field><br></br>
-               <Form.Field><Button basic color='red' circular icon = 'remove' type='button' value='remove' onClick={props.removeClick.bind(this, i)}></Button></Form.Field>
+               <Form.Field><Button color='red' size='mini' type='button' value='remove' onClick={props.removeClick.bind(this, i)}>X</Button></Form.Field>
             </div>          
         )
      }
@@ -45,9 +45,9 @@ const ProjectForm = (props) => {
                   </Form.Group>
                    <div className='btnAlign'>
                     <div className='supplyBtn'>
-                   <Form.Input><Button basic color='red' size= 'mini' floated= 'right' type='button' value='Add Supply' onClick={props.addClickNew.bind(this)}>Add Supply</Button></Form.Input><br></br><br></br>
+                   <Form.Input><Button color='red' size= 'mini' floated= 'right' type='button' value='Add Supply' onClick={props.addClickNew.bind(this)}>Add Supply</Button></Form.Input><br></br><br></br>
                    </div>
-                  <Form.Input><Button basic color='red' size= 'large' type='submit' value='Add Project'>Add My Project</Button></Form.Input><br></br>
+                  <Form.Input><Button color='red' size= 'medium' type='submit' value='Add Project'>Add My Project</Button></Form.Input><br></br>
                   </div>
               </Form> 
               {/* <Link to="/projects"> Show All Projects </Link> */}

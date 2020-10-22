@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import TrashDetails from './TrashDetails'
 import { Link } from 'react-router-dom';
 import './App.css';
-import { Button, Container, Header, Grid, Card } from 'semantic-ui-react'
+import { Button, Container } from 'semantic-ui-react'
 
 class TrashCard extends Component {
 
@@ -26,7 +26,7 @@ class TrashCard extends Component {
                 <div>
                 <h1>{this.props.trash.title}</h1><br></br>
                 <div className = 'trashCrd'>
-                <Button onClick={this.handleClicker} basic color = 'black' >
+                <Button color='red' onClick={this.handleClicker} >
                     More Details
                 </Button>
                 </div>

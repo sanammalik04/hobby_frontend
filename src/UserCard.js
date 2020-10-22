@@ -38,9 +38,8 @@ render(){
             <Image onClick={this.handleClick} src={this.props.userProject.ImageUrl} alt='' height="340px" width="265px"></Image>
             </div><br></br>
            
-            <Button basic color='red' onClick={() => this.props.deleteMyProject(this.props.userProject.id)}>Delete My Project</Button><br></br><br></br>
-            <Button basic color='red' onClick={this.handleEditClick}>Edit My Project</Button><br></br><br></br>
-        
+            <Button color='red' onClick={() => this.props.deleteMyProject(this.props.userProject.id)}>Delete My Project</Button><br></br><br></br>
+            <Button color='red' onClick={this.handleEditClick}>Edit My Project</Button><br></br><br></br>
         
            
 
@@ -49,6 +48,7 @@ render(){
 
 
         </div>
+        
         </div>
     )
 }

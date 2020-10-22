@@ -33,7 +33,7 @@ export const Navbar = (props) => {
 
               <Menu.Item
               as={NavLink} to="/my-projects"
-              name= 'My Projects'
+              name= 'Your Projects'
               active={activeItem === 'My Projects'}
               onClick={props.handleItemClick, props.userProjects}
               Users={props.users}
@@ -51,7 +51,7 @@ export const Navbar = (props) => {
               as={NavLink} to="/find-supplies"
               name= 'Search for Supplies'
               active={activeItem === 'Search for Supplies'}
-              onClick={props.handleItemClick}
+              onClick={props.handleItemClick, () => props.handleSearch("")}
               trash={props.trash}
               ></Menu.Item>
 

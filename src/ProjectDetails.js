@@ -29,7 +29,7 @@ const ProjectDetails = (props) => {
             <ul>{props.location.project.supplies.map(supplies => <li>{supplies.name}</li>)} </ul><br></br>
             {/* <ul>{props.projectShowpage.supplies.map(supplies => <li>{supplies.name}</li>)}</ul> */}
             <div className='pdBtn'>
-            <Button basic color='red' onClick={() => props.adoptProject(props.location.project)}>Add to My Projects</Button><br></br><br></br>
+            <Button color='red' onClick={() => props.adoptProject(props.location.project)}>Add to My Projects</Button><br></br><br></br>
             </div> 
             {/* </div> */}
             </div>

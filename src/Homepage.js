@@ -1,7 +1,7 @@
 // import React from 'react'
 import React, { useState } from 'react'
 import {Link} from 'react-router-dom'
-import { Button, Popup, Divider, Grid, Segment} from 'semantic-ui-react'
+import { Button, Popup} from 'semantic-ui-react'
 
 
 
@@ -16,8 +16,10 @@ const HomePage = (props) => {
             <div className='welcome'>
             <h1>Welcome!</h1>
 
+
             <Popup
                 trigger={<Button
+                        color='red'
                         type="button"
                         onClick={(e) => {
                         e.preventDefault();
@@ -33,6 +35,7 @@ const HomePage = (props) => {
 
                 trigger={<Button
                         type="button"
+                        color='red'
                         onClick={(e) => {
                         e.preventDefault();
                         window.location.href='/signup';

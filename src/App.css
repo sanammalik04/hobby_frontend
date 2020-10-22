@@ -1,40 +1,87 @@
 .App {
   background-color:whitesmoke;
+  /* background-image: url(https://ispydiy.com/wp-content/uploads/2015/04/ispydiy_linesacross_yellow7.jpg);
+  background-size: cover; */
   color: black;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding-left: 50px;
   padding-right: 50px;
-  padding-bottom: 200px;
   
   
+   
+
+}
+
+.username{
+  width: 300px;
+  height: 100px;
+  
+}
+
+.password{
+  width: 300px;
+  height: 100px;
+}
+
+.signInBtn{
+  padding-left: 95px;
 
 }
 
 .header3{
   padding-left: 520px;
   padding-bottom: 50px;
+  
 }
 
 .search{
   align-items: top;
 }
 
+
+
 .welcome{
   text-align: center;
+  
+  
 }
 
 .signup{
   background-color:whitesmoke;
+  height:500px;
+  width: 500px;
+  text-align: center;
+  cursor: pointer;
+  border: 10px solid hsla(0, 0%, 0%, 0.5);
+  padding-left: 95px;
+
 }
 
 .vsc-initialized{
   background-color: whitesmoke;
+  /* background-image: url(https://ispydiy.com/wp-content/uploads/2015/04/ispydiy_linesacross_yellow7.jpg);
+  background-size: cover; */
+  
 }
 
+
+
+
 .Login{
-  height:1000px;
+  height:500px;
+  width: 500px;
   text-align: center;
   cursor: pointer;
+  border: 10px solid hsla(0, 0%, 0%, 0.5);
+  padding-left: 95px;
+}
+
+.loginTitle{
+  padding-right: 110px;
+}
+
+.loginPage{
+  padding-left: 300px;
 }
 
 
@@ -107,6 +154,7 @@
   .grids{
    text-align: center;
    padding-left: 110px;
+
    
   }
 
@@ -140,6 +188,9 @@
 
 .gridProjectCard{
   text-align: center;
+  padding-left: 100px;
+  
+
 }
 
 .grid-item2{
@@ -194,12 +245,21 @@
   padding-top: 10px;
   padding-bottom: 20px;
   padding-right: 20px;
-  text-align: center;
+  
  
+}
+
+.mainPage{
+  padding-bottom: 200px;
 }
 
 .PCard{
   text-align: center;
+ 
+
+  
+ 
+  
 }
 
 .grid-item5{
@@ -215,14 +275,15 @@
 }
 
 .userCard{
-  text-align: center;
   padding-left: 115px;
+  height: 1100px;
 }
 
 
 .Pdpage{
 text-align: center;
 padding-bottom: 50px;
+height: 1500px;
 }
 
 .project{
@@ -243,9 +304,31 @@ padding-bottom: 50px;
  
 }
 
+.editGridForm{
+  float: left;
+  width: 1000px;
+  height: px;
+  border: 10px solid hsla(0, 0%, 0%, 0.5);
+  justify-content: center;
+  padding-left: 100px;
+  padding-top: 75px;
+  padding-bottom: 100px;
+  padding-right: 100px;
+}
+
 .projectFormDiv{
   padding-left: 165px;
   height: 1100px;
+  
+  
+}
+
+.editDiv{
+  padding-left: 165px;
+  height: 1100px;
+  border: 10px solid hsla(0, 0%, 0%, 0.5);
+  padding-right: 200px;
+  padding-top: 100px;
 }
 
 .btnAlign{
@@ -254,6 +337,14 @@ padding-bottom: 50px;
   justify-content: space-evenly;
   
 }
+
+.editBtn{
+  display:flex;
+  justify-content: center;
+  justify-content: space-evenly;
+}
+
+
 
 
 
@@ -280,6 +371,10 @@ padding-bottom: 50px;
     padding-right: 525px;
   }
 
+  .editSupplyBtn{
+    padding-right: 525px;
+  }
+
   .pName{
     text-align: center;
   }
@@ -287,3 +382,15 @@ padding-bottom: 50px;
   .pdBtn{
     text-align: center;
   }
+
+  /* .footer{
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: rgb(235, 195, 64);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  } */
+
+  

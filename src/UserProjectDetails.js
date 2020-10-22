@@ -109,7 +109,7 @@ handleEditClick = () =>{
                 label={supply.name}
                 />
                 {this.props.searchItem(supply.name)?
-                 <Button basic color='red' size='mini' circular icon = 'wrench' as={Link} to="/find-supplies"></Button> :
+                 <Button onClick= {() => this.props.handleSearch(supply.name)} basic color='red' size='mini' circular icon = 'wrench' as={Link} to="/find-supplies"></Button> :
                 null}
                 <br></br><br></br>
                 </div>
@@ -118,7 +118,7 @@ handleEditClick = () =>{
 )}
                 </div>
                     <div className='userCardButton'>
-                <Button basic color= 'red'  size='large' as={Link} to='/my-projects'users={this.props.users}> My Projects</Button> 
+                <Button color= 'red'  size='large' as={Link} to='/my-projects'users={this.props.users}> My Projects</Button> 
                     </div>
                 {/* <div>
                     <p onClick= {() => {this.props.updateProjects(this.props.updateProject)}, this.handleClick()}>Update Project</p>
