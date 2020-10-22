@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import TrashDetails from './TrashDetails'
 import { Link } from 'react-router-dom';
 import './App.css';
-import { Card, Grid, Image, Button, Container, Segment } from 'semantic-ui-react'
+import { Button, Container, Header, Grid, Card } from 'semantic-ui-react'
 
 class TrashCard extends Component {
 
@@ -16,23 +16,29 @@ class TrashCard extends Component {
 
     render(){
         return(
-
-    <div className="grid">
-                    {this.props.trash ?
-        <div class="grid-item">
+            <Container className="grids">
+                
+            <div>
+             
+             <div className= "grid-item">
                 <div>
-                <Card.Header>{this.props.trash.title}</Card.Header><br></br>
-                <div className = 'ui buttons'>
-                    <Button onClick={this.handleClicker} basic color = 'black' >
-                        More Details
-                    </Button>
+                   {this.props.trash ?
+                <div>
+                <h1>{this.props.trash.title}</h1><br></br>
+                <div className = 'trashCrd'>
+                <Button onClick={this.handleClicker} basic color = 'black' >
+                    More Details
+                </Button>
                 </div>
-                </div>
+               
                 </div>
                 : null }
+                </div>
+            </div>
 
-        </div>
-
+            </div>
+            </Container>
+           
 
     
 
@@ -73,3 +79,23 @@ export default TrashCard
 //             </Grid.Column>
 //             </Grid.Row>
 //             </Grid>
+
+{/* <Container>
+<div className='trashCrd'>
+<div className="grid">
+        {this.props.trash ?
+<div className="grid-item">
+    <div>
+    <Header className='trashTitle'>{this.props.trash.title}</Header><br></br>
+    <div className = 'ui buttons'>
+        <Button onClick={this.handleClicker} basic color = 'black' >
+            More Details
+        </Button>
+    </div>
+    </div>
+    </div>
+    : null }
+
+</div>
+</div>
+</Container> */}

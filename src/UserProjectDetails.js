@@ -70,7 +70,9 @@ handleEditClick = () =>{
     render(){
       
         return(
-            <div className="grid">
+            
+        <div className='userCard'>
+            <div className="grid2">
             <div className="grid-item4">
              
 
@@ -90,7 +92,7 @@ handleEditClick = () =>{
                 <Image src={JSON.parse(localStorage.currentProject).ImageUrl} alt="" height="340px" width="265px" ></Image><br></br>
                 </div>
                     <div className='userCardContent'>
-                <p>{JSON.parse(localStorage.currentProject).description}</p>
+                <h3>{JSON.parse(localStorage.currentProject).description}</h3>
                 <p>{JSON.parse(localStorage.currentProject).directions}</p>
                 {/* <h1>{this.props.project.name}</h1>
                 <img src={this.props.project.ImageUrl} alt="" height="340px" width="265px"></img>
@@ -107,7 +109,7 @@ handleEditClick = () =>{
                 label={supply.name}
                 />
                 {this.props.searchItem(supply.name)?
-                 <Button basic color='red' as={Link} to="/find-supplies"> Supply Exists Near You</Button> :
+                 <Button basic color='red' size='mini' circular icon = 'wrench' as={Link} to="/find-supplies"></Button> :
                 null}
                 <br></br><br></br>
                 </div>
@@ -116,7 +118,7 @@ handleEditClick = () =>{
 )}
                 </div>
                     <div className='userCardButton'>
-                <Button basic color= 'red' as={Link} to='/my-projects'users={this.props.users}> My Projects</Button> 
+                <Button basic color= 'red'  size='large' as={Link} to='/my-projects'users={this.props.users}> My Projects</Button> 
                     </div>
                 {/* <div>
                     <p onClick= {() => {this.props.updateProjects(this.props.updateProject)}, this.handleClick()}>Update Project</p>
@@ -129,6 +131,8 @@ handleEditClick = () =>{
     
             </div>
             </div>
+            </div>
+           
         )
 
       }

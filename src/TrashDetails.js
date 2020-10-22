@@ -1,6 +1,7 @@
 import React from 'react'
+import './App.css';
 import { Link } from 'react-router-dom'
-import { Card, Button } from 'semantic-ui-react'
+import { Card, Button, Container } from 'semantic-ui-react'
 import {
     GoogleMap,
     useLoadScript,
@@ -38,13 +39,16 @@ const TrashDetails = (props) => {
 
       
     return(
+
+        <Container className='trashDeets'>
         <div>
             {props.location.trash ?
             <div>
             <h1>{props.location.trash.title}</h1>
             
-            <img src={props.location.trash.photos[0].thumbnail} alt="" height="340px" width="265px"></img>
-            <p>{props.location.trash.content}</p>
+            {/* <img src={props.location.trash.photos[0].thumbnail} alt="" height="340px" width="265px"></img> */}
+            <p>{props.location.trash.content}</p><br></br>
+            <div className='google'>
             <GoogleMap 
                 mapContainerStyle={mapContainerStyle} 
                 zoom={13}
@@ -58,13 +62,17 @@ const TrashDetails = (props) => {
                     lng: parseFloat(props.location.trash.longitude)
                 }}
                 />
-            </GoogleMap>
+            </GoogleMap><br></br>
+            </div>
+            <div className='trashBtn'>
             {/* <GoogleMap location={{lat: 37.42216,lng: -122.08427}} zoomLevel={17} />    */}
-            <Button type="button" onClick={(e) => { e.preventDefault(); window.open(props.location.trash.url)}}> Reach Out </Button>
+            <Button size='large' basic color='red' type="button" onClick={(e) => { e.preventDefault(); window.open(props.location.trash.url)}}> Reach Out </Button>
+            </div>
             </div>
             : null}
 
         </div>
+        </Container>
     )
 }
 

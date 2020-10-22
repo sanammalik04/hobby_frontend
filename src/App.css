@@ -1,9 +1,18 @@
 .App {
-  background-color: rgb(250, 233, 212);
+  background-color:whitesmoke;
   color: black;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding-left: 50px;
   padding-right: 50px;
+  padding-bottom: 200px;
+  
+  
+
+}
+
+.header3{
+  padding-left: 520px;
+  padding-bottom: 50px;
 }
 
 .search{
@@ -15,11 +24,11 @@
 }
 
 .signup{
-  background-color:beige;
+  background-color:whitesmoke;
 }
 
 .vsc-initialized{
-  background-color:  rgb(250, 233, 212) ;
+  background-color: whitesmoke;
 }
 
 .Login{
@@ -73,25 +82,64 @@
   text-align: center;
 } */
 
-.grid-item {
+/* .grid-item {
   float: left;
-  width: 350px;
-  background:beige;
-  height: 120px;
+  width: 300px;
+  background: white;
+  height: 175px;
   border: 1px solid #333;
-  border-color: hsla(0, 0%, 0%, 0.5);
-  padding-left: 40px;
-  padding-top: 10px;
+  border-color: hsla(0, 63%, 79%, 0.5);
+  /* padding-left: 40px;
   padding-bottom: 30px;
-  padding-right: 20px;
+  padding-right: 20px; */
+  /* text-align: center;
+  padding-top: 35px; */
+ 
+  .grid-item{
+    float: left;
+    width: 300px;
+    height: 300px;
+    border: 5px solid hsla(0, 0%, 0%, 0.5);
+    text-align: center;
+    padding-top: 30px;
+  }
+
+  .grids{
+   text-align: center;
+   padding-left: 110px;
+   
+  }
+
+  .trashDeets{
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    height: 800px;
+    border: 5px solid hsla(0, 0%, 0%, 0.5);
+  }
+
+  .google{
+    padding-left: 150px;
+  }
+
+  .trashBtn{
+    text-align: center;
+  }
+  
+
+.trashCrd{
+  text-align: center;
+
 }
 
-.grid{
+
+
+.grid2{
   padding-left: 50px;
 }
 
 .gridProjectCard{
-  padding-left: 50px;
+  text-align: center;
 }
 
 .grid-item2{
@@ -100,6 +148,7 @@
   height: 300px;
   border: 0px solid hsla(0, 0%, 0%, 0.5);
   cursor: pointer;
+  
 }
 
 .gridUserCard{
@@ -124,11 +173,11 @@
 }
 
 .projectTitle{
-  padding-left: 350px;
+ text-align: center;
 }
 
 .userCardButton{
-  padding-left: 350px;
+  text-align: center;
 }
 
 .userCardImage{
@@ -138,43 +187,103 @@
 .grid-item4{
   float: left;
   width: 1000px;
-  height: px;
+  height: 1000px;
   border: 10px solid hsla(0, 0%, 0%, 0.5);
+  border-bottom: 10px solid hsla(0, 0%, 0%, 0.5) ;
   padding-left: 40px;
   padding-top: 10px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   padding-right: 20px;
+  text-align: center;
  
+}
+
+.PCard{
+  text-align: center;
 }
 
 .grid-item5{
   float: left;
   width: 1000px;
-  height: px;
+  height: 1100px;
   border: 10px solid hsla(0, 0%, 0%, 0.5);
   padding-left: 40px;
   padding-top: 10px;
-  padding-bottom: 30px;
+  padding-bottom: 50px;
   padding-right: 20px;
  
 }
 
-.ProjectImage{
-  padding-right: 400px;
+.userCard{
+  text-align: center;
+  padding-left: 115px;
+}
+
+
+.Pdpage{
+text-align: center;
+padding-bottom: 50px;
 }
 
 .project{
-  padding-left: 350px;
+  text-align: left;
 }
+
 
 .gridForm{
   float: left;
   width: 1000px;
   height: px;
   border: 10px solid hsla(0, 0%, 0%, 0.5);
-  padding-left: 40px;
-  padding-top: 10px;
-  padding-bottom: 30px;
-  padding-right: 20px;
+  justify-content: center;
+  padding-left: 100px;
+  padding-top: 75px;
+  padding-bottom: 100px;
+  padding-right: 100px;
  
 }
+
+.projectFormDiv{
+  padding-left: 165px;
+  height: 1100px;
+}
+
+.btnAlign{
+  display:flex;
+  justify-content: center;
+  justify-content: space-evenly;
+  
+}
+
+
+
+.projectContent{
+  text-align: left;
+}
+
+.header{
+  text-align: center;
+}
+
+.header2{
+  text-align: center;
+}
+
+.grid{
+  padding-bottom: 500x;
+  padding-left: 155px;
+  height: 1000px;
+  
+  }
+
+  .supplyBtn{
+    padding-right: 525px;
+  }
+
+  .pName{
+    text-align: center;
+  }
+
+  .pdBtn{
+    text-align: center;
+  }

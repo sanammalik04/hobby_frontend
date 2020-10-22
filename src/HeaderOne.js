@@ -3,7 +3,7 @@ import { Header, Icon } from 'semantic-ui-react'
 
 const HeaderOne = (props) => {
     return(
-        <div className="header">
+        <div className="header3">
             <Header as='h1' icon>
                 <Icon name='paint brush' />
                 Craftsy

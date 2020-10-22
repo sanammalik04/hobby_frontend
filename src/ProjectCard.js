@@ -2,7 +2,7 @@ import React from 'react'
 import ProjectDetails from './ProjectDetails'
 import './App.css';
 import { Link } from 'react-router-dom';
-import { Card, Image, Button } from 'semantic-ui-react'
+import { Card, Image, Button, Container } from 'semantic-ui-react'
 
 
 class ProjectCard extends React.Component { 
@@ -20,7 +20,7 @@ render(){
     return(
 
         
-
+        <Container className='PCard'>
         <div className="gridProjectCard">
             
             <div className="grid-item2">
@@ -36,6 +36,7 @@ render(){
             </div>
             </div>
         </div>
+        </Container>
     )
 }
 }
