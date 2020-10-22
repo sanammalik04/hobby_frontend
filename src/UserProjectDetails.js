@@ -120,9 +120,9 @@ handleEditClick = () =>{
                     <div className='userCardButton'>
                 <Button color= 'red'  size='large' as={Link} to='/my-projects'users={this.props.users}> My Projects</Button> 
                     </div>
-                {/* <div>
+                <div>
                     <p onClick= {() => {this.props.updateProjects(this.props.updateProject)}, this.handleClick()}>Update Project</p>
-                </div> */}
+                </div>
                 
             </div>
             : null}

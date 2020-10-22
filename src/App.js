@@ -29,7 +29,7 @@ let usersUrl = 'http://localhost:3000/users/'
 let suppliesUrl = 'http://localhost:3000/supplies/'
 let projectSuppliesUrl = 'http://localhost:3000/project_supplies/'
 let trashUrl = "https://trashnothing.com/api/v1.2/posts/search?search=crafts&sort_by=relevance&types=offer&sources=trashnothing&per_page=20&page=1&device_pixel_ratio=1&latitude=38.8890624&longitude=-76.9785856&radius=160934&api_key=d3rI3vCu9OPCizgN3H6xThrgpAcdg4ZueAbGTVkK"
-
+// let offerUpUrl = "https://offerup.com/api/search/v4/feed?limit=100&is_shippable_only=true&q=widget"
 
 
 
@@ -48,6 +48,7 @@ class App extends Component {
       supplies: [],
       suppliesToDelete: [],
       showTrash: []
+     
     
      
     }
@@ -71,6 +72,7 @@ componentDidMount(){
   this.userProjects()
   this.trashItems()
   this.allSupplies()
+ 
   
 }
 
@@ -91,6 +93,8 @@ trashItems = () => {
   }))
   
 }
+
+
 
 
 
