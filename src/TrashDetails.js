@@ -13,7 +13,7 @@ import {
 const TrashDetails = (props) => {
     // const libraries = ["places"]
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: 'AIzaSyBO5elK2y6CEtWBfZ49b4ZFQVl-UUSyfJg'
+        googleMapsApiKey: 'AIzaSyAP8zs8_admCBmyUwrrfoxyGFC-TZlPUqs'
     })
     const mapContainerStyle = {
         width: '50vw',
@@ -66,7 +66,7 @@ const TrashDetails = (props) => {
             </div>
             <div className='trashBtn'>
             {/* <GoogleMap location={{lat: 37.42216,lng: -122.08427}} zoomLevel={17} />    */}
-            <Button size='large' basic color='red' type="button" onClick={(e) => { e.preventDefault(); window.open(props.location.trash.url)}}> Reach Out </Button>
+            <Button size='large' color='red' type="button" onClick={(e) => { e.preventDefault(); window.open(props.location.trash.url)}}> Reach Out </Button>
             </div>
             </div>
             : null}

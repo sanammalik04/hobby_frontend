@@ -15,7 +15,7 @@ const ProjectForm = (props) => {
         return props.supplies.map((supply, i) => 
             <div key={i}>
                <Form.Field><Input type="text" value={supply.name} onChange={props.changeSuppliesNew.bind(this, i)}></Input></Form.Field><br></br>
-               <Form.Field><Button color='red' size='mini' type='button' value='remove' onClick={props.removeClick.bind(this, i)}>X</Button></Form.Field>
+               <Form.Field><Button color='red' size='mini' type='button' value='remove' onClick={props.removeClick.bind(this, i)}>X</Button></Form.Field><br></br>
             </div>          
         )
      }

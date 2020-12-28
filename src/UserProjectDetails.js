@@ -38,7 +38,7 @@ class UserProjectDetails extends React.Component {
        .then(this.setState({
            updatedSupplies: !this.state.updatedSupplies
        }))
-       // .then(this.props.currentProject(this.props.location.userProject.id))
+    //    .then(this.props.currentProject(this.props.location.userProject.id))
 
        
    }
@@ -94,7 +94,11 @@ handleEditClick = () =>{
                     <div className='userCardContent'>
                 <h3>{JSON.parse(localStorage.currentProject).description}</h3>
                 <p>{JSON.parse(localStorage.currentProject).directions}</p>
-               
+                {/* <h1>{this.props.project.name}</h1>
+                <img src={this.props.project.ImageUrl} alt="" height="340px" width="265px"></img>
+                <p>{this.props.project.description}</p> */}
+                {/* <p>{this.props.project.directions}</p> */}
+                {/* <Checkbox label='Make my supplies visible' /> */}
                 <h2>Supplies Needed:</h2>
 
                
@@ -116,9 +120,9 @@ handleEditClick = () =>{
                     <div className='userCardButton'>
                 <Button color= 'red'  size='large' as={Link} to='/my-projects'users={this.props.users}> My Projects</Button> 
                     </div>
-                <div>
+                {/* <div>
                     <p onClick= {() => {this.props.updateProjects(this.props.updateProject)}, this.handleClick()}>Update Project</p>
-                </div>
+                </div> */}
                 
             </div>
             : null}
