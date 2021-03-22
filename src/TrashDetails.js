@@ -13,7 +13,7 @@ import {
 const TrashDetails = (props) => {
     // const libraries = ["places"]
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: 'AIzaSyAP8zs8_admCBmyUwrrfoxyGFC-TZlPUqs'
+        googleMapsApiKey: 'AIzaSyDujFBopWqgOzIucKEcG_wtqvhocjdvcjo'
     })
     const mapContainerStyle = {
         width: '50vw',

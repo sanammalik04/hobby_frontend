@@ -404,18 +404,23 @@ changeSuppliesNew = (i, e)=> {
        
   //  }
 
+  //logic for retrieving items from trashnothing API based on what user puts in the search bar
+  
   handleSearch = (input) => {
     this.setState({
+      //setting the state for showTrash to show the items that include the input of the user in the content
+      //section of the trashnothing API
       showTrash: this.state.trash.filter(trash => trash.content.includes(input))
     })
   }
 
   searchItem = (input) => {
+    //Used a boolean to determine whether the item exists or not in the trashnothing API
     let bool = false
+    //used a ternary to fid out whether the items that matched with the user input exist or not
     {this.state.trash.filter(trash => trash.content.includes(input)).length > 0? bool = true : bool = false}
-    console.log(bool)
     return bool
-  }
+  }  
 
 
 
